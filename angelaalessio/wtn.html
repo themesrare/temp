@@ -572,8 +572,72 @@
  </div> <!-- End Main Container -->
  
  <!-- JavaScript to Handle 1-Page PDF Download -->
- 
-<script>
+ <script>
+  function downloadPDF() {
+    const dlLink = document.getElementById('download-link');
+    const element = document.getElementById('wtn-document');
+    
+    // 1. Hide the text link so it doesn't print
+    dlLink.style.visibility = 'hidden'; 
+    
+    // 2. Temporarily remove the shadow so the PDF edges remain perfectly clean
+    element.style.boxShadow = 'none';
+
+    // 3. THE FIX: Automatically find and convert all online images to Base64 to bypass security blocks
+    const images = Array.from(element.getElementsByTagName('img'));
+    const imagePromises = images.map(img => {
+      // If it's already Base64, skip it
+      if (img.src.startsWith('data:')) return Promise.resolve();
+      
+      // Fetch the online PNG/JPG and convert it
+      return fetch(img.src, { mode: 'cors' })
+        .then(response => response.blob())
+        .then(blob => {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              img.src = reader.result; // Swap the online URL for safe Base64 data
+              resolve();
+            };
+            reader.readAsDataURL(blob);
+          });
+        })
+        .catch(err => {
+          console.warn("Could not securely load image for PDF:", img.src);
+          return Promise.resolve(); // Keep generating PDF even if one image fails
+        });
+    });
+
+    // 4. Wait for all images to safely convert, THEN generate the PDF
+    Promise.all(imagePromises).then(() => {
+      html2canvas(element, { 
+        scale: 2, 
+        useCORS: true, 
+        scrollY: 0 
+      }).then(canvas => {
+        // Convert the canvas to a high-quality JPEG image
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        
+        // Initialize jsPDF for an A4 portrait document
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        // Calculate dimensions to perfectly fit A4 width
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        // Add the image to the PDF and download it
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('WTN-Transfer-Note.pdf');
+
+        // Instantly restore link and shadow on the webpage
+        dlLink.style.visibility = 'visible';
+        element.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+      });
+    });
+  }
+</script>
+<!-- <script>
   function downloadPDF() {
     const dlLink = document.getElementById('download-link');
     const element = document.getElementById('wtn-document');
@@ -610,7 +674,7 @@
       element.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
     });
   }
-</script>
+</script> -->
 
 </body>
 

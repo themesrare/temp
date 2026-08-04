@@ -3,7 +3,6 @@
 
 <head>
  <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Waste Transfer Note</title>
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -31,13 +30,16 @@
    padding: 20px 0;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
+   min-width: 1000px; /* Forces a scrollbar instead of shrinking the document */
   }
 
   /* Reverted exactly to the working A4 millimeter dimensions */
   #wtn-document {
    width: 210mm;
+   min-width: 210mm;
    height: 296.5mm;
    max-height: 296.5mm;
+   flex-shrink: 0; /* Prevents layout collapse on small screens */
    background: #ffffff;
    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
    position: relative;

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <title>Waste Transfer Note</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+ <style>
+  * {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-family: 'Inter', sans-serif;
+  }
+
+  body {
+   background-color: #e2e8f0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 20px 0;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   min-width: 1000px;
+  }
+
+
+  .action-controls {
+   position: fixed;
+   top: 20px;
+   right: 20px;
+   z-index: 1000;
+   display: flex;
+  }
+
+  .btn-download {
+   background-color: #0b4f28;
+   color: white;
+   border: none;
+   padding: 12px 24px;
+   font-size: 14px;
+   font-weight: 700;
+   border-radius: 6px;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   transition: background 0.2s ease;
+  }
+
+  .btn-download:hover {
+   background-color: #083b1e;
+  }
+
+  #wtn-document {
+   width: 210mm;
+   min-width: 210mm;
+   height: 296.5mm;
+   max-height: 296.5mm;
+   flex-shrink: 0;
+   background: #ffffff;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+   position: relative;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   margin: 0 auto;
+  }
+
+  .header-section {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 15px 15mm 5px 20mm;
+  }
+
+  .header-left {
+   flex: 1;
+  }
+
+  .duty-badge {
+   background: #0b4f28;
+   color: white;
+   display: inline-block;
+   padding: 4px 12px;
+   font-size: 13px;
+   font-weight: 700;
+   font-style: italic;
+   letter-spacing: 0.5px;
+   margin-bottom: 5px;
+   border-radius: 5px;
+  }
+
+  .duty-badge span {
+   color: #74c365;
+   margin-left: 5px;
+  }
+
+  .main-title {
+   font-family: 'Oswald', sans-serif;
+   font-size: 48px;
+   color: #0b4f28;
+   text-transform: uppercase;
+   line-height: 1.1;
+   letter-spacing: -0.5px;
+  }
+
+  .sub-title {
+   font-size: 12px;
+   font-weight: 800;
+   color: #1e293b;
+   margin-top: 5px;
+   padding-bottom: 10px;
+   border-bottom: 1px solid #cbd5e1;
+   width: 100%;
+  }
+
+  .logo-container {
+   width: 130px;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   margin-left: 30px;
+  }
+
+
+  .logo-container img {
+   width: 100%;
+   height: auto;
+  }
+
+  .doc-body {
+   padding: 5px 20mm;
+   position: relative;
+   flex: 1;
+  }
+
+  .timeline-line {
+   position: absolute;
+   left: calc(20mm + 22px);
+   top: 15px;
+   bottom: 110px;
+   width: 1px;
+   background: #dae4de;
+   z-index: 1;
+  }
+
+  .timeline-item {
+   display: flex;
+   gap: 20px;
+   margin-bottom: 14px;
+   position: relative;
+   z-index: 2;
+  }
+
+  .timeline-icon {
+   width: 44px;
+   height: 44px;
+   background: #dae4de;
+   color: #0f4f28;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 20px;
+   flex-shrink: 0;
+   box-shadow: 0 0 0 10px #ffffff;
+  }
+
+  .timeline-content {
+   flex: 1;
+   padding-top: 5px;
+  }
+
+  .timeline-header {
+   font-family: 'Oswald', sans-serif;
+   color: #0b4f28;
+   font-size: 18px;
+   font-weight: 600;
+   text-transform: uppercase;
+   border-bottom: 2px solid #88a795;
+   display: inline-block;
+   padding-bottom: 2px;
+   margin-bottom: 8px;
+   letter-spacing: 0.5px;
+  }
+
+  .data-row {
+   font-size: 13px;
+   margin-bottom: 5px;
+   color: #1e293b;
+   line-height: 1.5;
+  }
+
+  .data-row strong {
+   color: #0f172a;
+   font-weight: 700;
+  }
+
+  .data-row.small-text {
+   font-size: 12px;
+   color: #475569;
+  }
+
+  .signatures-section {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   padding: 0px 20mm 15px 20mm;
+   position: relative;
+   z-index: 2;
+  }
+
+  .sig-box {
+   width: 38%;
+  }
+
+  .sig-header {
+   background: #0b4f28;
+   color: white;
+   text-align: center;
+   padding: 6px;
+   font-size: 11px;
+   font-weight: 700;
+   border-radius: 6px 6px 0 0;
+  }
+
+  .sig-body {
+   border: 1px solid #0b4f28;
+   border-top: none;
+   height: 75px;
+   background: #ffffff;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 5px;
+  }
+
+  .sig-body img {
+   max-height: 100%;
+   max-width: 100%;
+   object-fit: contain;
+  }
+
+  .sig-footer {
+   margin-top: 5px;
+   font-size: 12px;
+   line-height: 1.8;
+  }
+
+  .sig-footer-line {
+   display: flex;
+   align-items: center;
+  }
+
+  .sig-footer-line span {
+   width: 50px;
+   color: #000000;
+   font-weight: 700;
+   font-size: 12px;
+  }
+
+  .sig-footer-line div {
+   flex: 1;
+   border-bottom: 1px solid #000000;
+   padding-left: 5px;
+   color: #000000;
+   font-weight: 600;
+   font-size: 12px;
+  }
+
+  .sig-middle {
+   width: 20%;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding-top: 15px;
+  }
+
+  .sig-middle i {
+   font-size: 32px;
+   color: #0b4f28;
+   margin-bottom: 5px;
+  }
+
+  .sig-middle p {
+   font-size: 10px;
+   font-weight: 800;
+   color: #999999;
+   line-height: 1.2;
+  }
+
+  .promise-box {
+   margin: 0 20mm 10px 20mm;
+   border: 1px solid #0b4f28;
+   border-radius: 8px;
+   display: flex;
+   align-items: center;
+   padding: 10px 15px;
+   background: #ffffff;
+  }
+
+  .promise-icon {
+   background: #0b4f28;
+   color: white;
+   width: 35px;
+   height: 35px;
+   border-radius: 6px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 20px;
+   flex-shrink: 0;
+  }
+
+  .promise-title {
+   font-size: 15px;
+   font-weight: 800;
+   color: #0b4f28;
+   padding: 0 15px;
+   border-right: 1px solid #cbd5e1;
+   white-space: nowrap;
+  }
+
+  .promise-text {
+   padding-left: 15px;
+   font-size: 11px;
+   color: #334155;
+   line-height: 1.3;
+  }
+
+  .footer-bar {
+   background: #0b4f28;
+   color: white;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   padding: 12px 20mm;
+   width: 100%;
+  }
+
+  .footer-item {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   font-size: 10px;
+   font-weight: 500;
+  }
+
+  .footer-item i {
+   font-size: 14px;
+  }
+
+  .footer-legal {
+   text-align: center;
+   font-size: 9px;
+   color: #475569;
+   padding: 10px 0;
+   background: #f8fafc;
+   width: 100%;
+  }
+
+ </style>
+</head>
+
+<body>
+
+ <div class="action-controls" id="download-controls">
+  <button class="btn-download" onclick="downloadPDF()">
+   <i class="fa-solid fa-download"></i> Download PDF
+  </button>
+ </div>
+
+ <div id="wtn-document">
+
+  <!-- HEADER -->
+  <div class="header-section">
+   <div class="header-left">
+    <div class="duty-badge">JUNKSAWAY DUTY OF CARE <span>///</span></div>
+    <h1 class="main-title">Waste Transfer Note</h1>
+    <div class="sub-title">YOUR RESPONSIBILITY, OUR COMMITMENT.</div>
+   </div>
+   <div class="logo-container">
+    <!-- Main Logo Link -->
+    <img id="logo-img" src="https://themesrare.github.io/temp/ja/wtn/images/main_logo.png" alt="JunksAway Logo">
+   </div>
+  </div>
+
+  <div class="doc-body">
+
+   <div class="timeline-line"></div>
+
+   <!-- Section 1 -->
+   <div class="timeline-item">
+    <div class="timeline-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+    <div class="timeline-content">
+     <div class="timeline-header">1. Collection Information</div>
+     <div class="data-row"><strong>Reference ID:</strong> <span id="val-ref">JA145922</span></div>
+     <div class="data-row"><strong>Collection Address:</strong> <span id="val-col-addr">5 Sheldon Road, Dagenham, Essex, RM9 6DT</span></div>
+     <div class="data-row"><strong>Collection Date & Time:</strong> <span id="val-col-date">11/09/2025 14:05</span></div>
+    </div>
+   </div>
+
+   <!-- Section 2 -->
+   <div class="timeline-item">
+    <div class="timeline-icon"><i class="fa-solid fa-trash-can"></i></div>
+    <div class="timeline-content">
+     <div class="timeline-header">2. Waste Details</div>
+     <div class="data-row"><strong>Waste Description:</strong> <span id="val-waste-desc">1x Load (Max 2yd³ / 150kgs), 1x Single Mattress</span></div>
+     <div class="data-row"><strong>Estimated Volume:</strong> <span id="val-waste-vol">2.70yd³</span></div>
+    </div>
+   </div>
+
+   <!-- Section 3 -->
+   <div class="timeline-item">
+    <div class="timeline-icon"><i class="fa-solid fa-user"></i></div>
+    <div class="timeline-content">
+     <div class="timeline-header">3. Waste Owner Declaration</div>
+     <div class="data-row small-text">By signing below, I confirm that I have followed the waste hierarchy<br>in accordance with Regulation 12 of the Waste (England and Wales) Regulations 2011.</div>
+     <div class="data-row" style="margin-top: 5px;"><strong>Waste Owner:</strong> <span id="val-owner-name">Customer</span></div>
+    </div>
+   </div>
+
+   <!-- Section 4 -->
+   <div class="timeline-item">
+    <div class="timeline-icon"><i class="fa-solid fa-truck"></i></div>
+    <div class="timeline-content">
+     <div class="timeline-header">4. Waste Collected By</div>
+     <div class="data-row"><strong>Collector Name:</strong> <span id="val-collector-name">Maliek Daley</span></div>
+     <div class="data-row"><strong>Collector Address:</strong> <span id="val-collector-addr">45 Portelet Road, London, Greater London, UK, E1 4EL</span></div>
+     <div class="data-row"><strong>Company Name:</strong> <span id="val-collector-company">ROACH WASTE MANAGEMENT</span></div>
+     <div class="data-row"><strong>Environment Agency Carrier Licence:</strong> <span id="val-collector-licence">CBDU492536</span></div>
+    </div>
+   </div>
+
+   <!-- Section 5 -->
+   <div class="timeline-item" style="margin-bottom: 0;">
+    <div class="timeline-icon"><i class="fa-regular fa-building"></i></div>
+    <div class="timeline-content">
+     <div class="timeline-header">5. Arrangements Made By (Broker)</div>
+     <div class="data-row"><strong>Broker Company:</strong> <span id="val-broker-company">JUNKS AWAY LTD</span></div>
+     <div class="data-row"><strong>Broker Address:</strong> <span id="val-broker-addr">171A Darkes Lane, Potters Bar, EN6 1BW</span></div>
+     <div class="data-row"><strong>Environment Agency Registration:</strong> <span id="val-broker-licence">CBDU375738</span></div>
+    </div>
+   </div>
+
+  </div>
+
+  <!-- SIGNATURES -->
+  <div class="signatures-section">
+
+   <div class="sig-box">
+    <div class="sig-header">WASTE OWNER SIGNATURE</div>
+    <div class="sig-body">
+
+     <img id="sig-img-owner" src="https://themesrare.github.io/temp/ja/wtn/images/signature.png" alt="Owner Signature">
+    </div>
+    <div class="sig-footer">
+     <div class="sig-footer-line">
+      <span>Name:</span>
+      <div id="sig-name-owner">Customer</div>
+     </div>
+     <div class="sig-footer-line">
+      <span>Date:</span>
+      <div id="sig-date-owner">11/09/2025</div>
+     </div>
+    </div>
+   </div>
+
+
+   <div class="sig-middle">
+    <i class="fa-solid fa-recycle"></i>
+    <p>THANK YOU<br>FOR HELPING US<br>KEEP OUR PLANET<br>CLEAN & GREEN.</p>
+   </div>
+
+   <!-- Collector Signature -->
+   <div class="sig-box">
+    <div class="sig-header">COLLECTOR SIGNATURE</div>
+    <div class="sig-body">
+
+     <img id="sig-img-collector" src="https://themesrare.github.io/temp/ja/wtn/images/signature.png" alt="Collector Signature">
+    </div>
+    <div class="sig-footer">
+     <div class="sig-footer-line">
+      <span>Name:</span>
+      <div id="sig-name-collector">Maliek Daley</div>
+     </div>
+     <div class="sig-footer-line">
+      <span>Date:</span>
+      <div id="sig-date-collector">11/09/2025</div>
+     </div>
+    </div>
+   </div>
+
+  </div>
+
+
+  <div class="promise-box">
+   <div class="promise-icon"><i class="fa-solid fa-leaf"></i></div>
+   <div class="promise-title">OUR PROMISE</div>
+   <div class="promise-text">JunksAway and our partners are committed to responsible<br>waste management and recycling wherever possible.</div>
+  </div>
+
+
+  <div class="footer-bar">
+   <div class="footer-item"><i class="fa-solid fa-phone"></i> 020 3051 5122</div>
+   <div class="footer-item" style="border-left: 1px solid rgba(255,255,255,0.4); border-right: 1px solid rgba(255,255,255,0.4); padding: 0 15px;">
+    <i class="fa-solid fa-globe"></i> junksaway.co.uk
+   </div>
+   <div class="footer-item" style="border-right: 1px solid rgba(255,255,255,0.4); padding-right: 15px;">
+    <i class="fa-regular fa-envelope"></i> info@junksaway.co.uk
+   </div>
+   <div class="footer-item"><i class="fa-solid fa-location-dot"></i> London • Essex • Hertfordshire • Surrey</div>
+  </div>
+
+
+  <div class="footer-legal">
+   JUNKS AWAY LTD &nbsp;|&nbsp; Environment Agency Registration: CBDU375738 &nbsp;|&nbsp; Company Registration No: 10882506
+  </div>
+
+ </div>
+
+ <script>
+  function downloadPDF() {
+   const dlControls = document.getElementById('download-controls');
+   const element = document.getElementById('wtn-document');
+
+   dlControls.style.display = 'none';
+   element.style.boxShadow = 'none';
+
+   html2canvas(element, {
+    scale: 2,
+    useCORS: true,
+    scrollY: 0
+   }).then(canvas => {
+    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+    const {
+     jsPDF
+    } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('WTN-Transfer-Note.pdf');
+    dlControls.style.display = 'flex';
+    element.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+   });
+  }
+
+ </script>
+
+</body>
+
+</html>

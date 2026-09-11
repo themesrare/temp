@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Co-worker job sheet</title>
+
+ <!-- FontAwesome Icons -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+ <!-- Inter Font -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+ <style>
+  * {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-family: 'Inter', sans-serif;
+  }
+
+  body {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   padding: 20px;
+  }
+
+  .app-container {
+   max-width: 480px;
+   margin: 0 auto;
+   background: #ffffff;
+  }
+
+  /* ---- HEADER ---- */
+  .header-card {
+   background: #118b2c;
+   background: linear-gradient(180deg, rgba(123, 217, 87, 1) 0%, rgba(39, 151, 76, 1) 100%);
+   border-radius: 16px;
+   padding: 10px 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 20px;
+   box-shadow: 0 4px 6px rgba(17, 139, 44, 0.2);
+  }
+
+  .header-logo {
+   height: 75px;
+   border-radius: 12px;
+   object-fit: contain;
+  }
+
+  .header-title {
+   color: #ffffff;
+   font-size: 20px;
+   font-weight: 800;
+   text-transform: uppercase;
+   flex: 1;
+   padding-left: 15px;
+  }
+
+  .header-id {
+   background: #ffffff;
+   color: #000000;
+   font-weight: 800;
+   font-size: 14px;
+   padding: 8px 14px;
+   border-radius: 20px;
+  }
+
+  /* ---- SECTION STYLES ---- */
+  .section-block {
+   margin-bottom: 15px;
+  }
+
+  .section-title {
+   font-size: 12px;
+   font-weight: 800;
+   color: #64748b;
+   margin-bottom: 8px;
+   text-transform: uppercase;
+   letter-spacing: 0.5px;
+  }
+
+  .info-card {
+   background: #f8fafc;
+   border: 1px solid #e2e8f0;
+   border-radius: 12px;
+   padding: 16px;
+  }
+
+  /* ---- GRID (DATE & TIME) ---- */
+  .grid-2 {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 15px;
+  }
+
+  .grid-card {
+   background: #f8fafc;
+   border: 1px solid #e2e8f0;
+   border-radius: 12px;
+   padding: 15px;
+   display: flex;
+   align-items: center;
+   gap: 12px;
+  }
+
+  .icon-green {
+   color: #118b2c;
+   font-size: 22px;
+  }
+
+  .grid-data label {
+   display: block;
+   font-size: 11px;
+   font-weight: 700;
+   color: #64748b;
+   margin-bottom: 2px;
+  }
+
+  .grid-data span {
+   display: block;
+   font-size: 17px;
+   font-weight: 800;
+   color: #0f172a;
+  }
+
+  /* ---- COLLECTION ADDRESS ---- */
+  .address-flex {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+  }
+
+  .address-text {
+   font-size: 15px;
+   font-weight: 700;
+   color: #0f172a;
+   line-height: 1.4;
+  }
+
+  /* ---- JOB SUMMARY ---- */
+  .link-row {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   margin-bottom: 15px;
+   flex-wrap: wrap;
+  }
+
+  .link-label {
+   font-size: 14px;
+   font-weight: 700;
+   color: #0f172a;
+  }
+
+  .link-pill {
+   background: #ffffff;
+   border: 1px solid #cbd5e1;
+   padding: 6px 12px;
+   border-radius: 20px;
+   font-size: 13px;
+   font-weight: 500;
+   color: #2563eb;
+   text-decoration: underline;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   max-width: 100%;
+  }
+
+  .btn-view-photos {
+   background: #e6f4ea;
+   color: #118b2c;
+   border: none;
+   padding: 10px 18px;
+   border-radius: 8px;
+   font-size: 14px;
+   font-weight: 700;
+   cursor: pointer;
+   display: inline-block;
+  }
+
+  /* ---- OFFICE NOTES ---- */
+  .notes-flex {
+   display: flex;
+   align-items: flex-start;
+   gap: 15px;
+  }
+
+  .notes-text {
+   font-size: 14px;
+   font-weight: 500;
+   color: #0f172a;
+   line-height: 1.5;
+  }
+
+  /* ---- FOOTER BUTTON ---- */
+  .btn-create-wtn {
+   background: #118b2c;
+   color: #ffffff;
+   border: none;
+   width: 100%;
+   padding: 18px;
+   border-radius: 12px;
+   font-size: 18px;
+   font-weight: 700;
+   cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+   margin-top: 20px;
+   box-shadow: 0 4px 12px rgba(17, 139, 44, 0.2);
+  }
+
+ </style>
+</head>
+
+<body>
+
+ <div class="app-container">
+
+  <!-- HEADER -->
+  <div class="header-card">
+   <img src="https://themesrare.github.io/temp/ja/cw-jobsheet/images/logo.png" alt="JunksAway" class="header-logo">
+   <div class="header-title">JOB SHEET</div>
+   <div class="header-id" id="val-job-id">JUNK-4560</div>
+  </div>
+
+  <!-- DATE & TIME -->
+  <div class="section-block">
+   <div class="section-title">DATE & TIME</div>
+   <div class="grid-2">
+    <div class="grid-card">
+     <i class="fa-regular fa-calendar icon-green"></i>
+     <div class="grid-data">
+      <label>DATE</label>
+      <span id="val-date">11/09/2026</span>
+     </div>
+    </div>
+    <div class="grid-card">
+     <i class="fa-regular fa-clock icon-green"></i>
+     <div class="grid-data">
+      <label>TIME</label>
+      <span id="val-time">15:00</span>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <!-- COLLECTION ADDRESS -->
+  <div class="section-block">
+   <div class="section-title">COLLECTION ADDRESS</div>
+   <div class="info-card address-flex">
+    <i class="fa-solid fa-location-dot icon-green"></i>
+    <div class="address-text" id="val-address">
+     Flat 24, Unit 1, Timberwharf Road,<br>Ravensdale Ind. Estate, London N16 6AY
+    </div>
+   </div>
+  </div>
+
+  <!-- JOB SUMMARY / PHOTOS -->
+  <div class="section-block">
+   <div class="section-title">JOB SUMMARY / PHOTOS</div>
+   <div class="info-card">
+    <div class="link-row">
+     <i class="fa-solid fa-link icon-green"></i>
+     <span class="link-label">Job Summary Link</span>
+     <a href="#" class="link-pill" id="val-summary-link">https://app.junksaway.co.uk/js?job=3647</a>
+    </div>
+    <button class="btn-view-photos" id="btn-view-photos">View Photos</button>
+   </div>
+  </div>
+
+  <!-- OFFICE NOTES -->
+  <div class="section-block">
+   <div class="section-title">JUNKS AWAY OFFICE NOTES</div>
+   <div class="info-card notes-flex">
+    <i class="fa-solid fa-file-lines icon-green"></i>
+    <div class="notes-text" id="val-office-notes">
+     Please follow the job instructions exactly. If anything is different on site, contact the JunksAway office before removing extra items.
+    </div>
+   </div>
+  </div>
+
+  <!-- CTA BUTTON -->
+  <button class="btn-create-wtn" id="btn-create-wtn">
+   Create WTN <i class="fa-solid fa-arrow-up-right-from-square"></i>
+  </button>
+
+ </div>
+
+</body>
+
+</html>

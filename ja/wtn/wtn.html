@@ -4,9 +4,9 @@
 <head>
  <meta charset="UTF-8">
  <title>Waste Transfer Note</title>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ <!-- FontAwesome Icons -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <!-- Google Fonts -->
  <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
@@ -20,53 +20,25 @@
   }
 
   body {
-   background-color: #e2e8f0;
+   background-color: #ffffff;
    display: flex;
    flex-direction: column;
    align-items: center;
-   padding: 20px 0;
+   padding: 0;
+   margin: 0;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
    min-width: 1000px;
   }
 
-
-  .action-controls {
-   position: fixed;
-   top: 20px;
-   right: 20px;
-   z-index: 1000;
-   display: flex;
-  }
-
-  .btn-download {
-   background-color: #0b4f28;
-   color: white;
-   border: none;
-   padding: 12px 24px;
-   font-size: 14px;
-   font-weight: 700;
-   border-radius: 6px;
-   cursor: pointer;
-   display: flex;
-   align-items: center;
-   gap: 8px;
-   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-   transition: background 0.2s ease;
-  }
-
-  .btn-download:hover {
-   background-color: #083b1e;
-  }
-
   #wtn-document {
    width: 210mm;
    min-width: 210mm;
-   height: 296.5mm;
-   max-height: 296.5mm;
+   height: 297mm;
+   max-height: 297mm;
    flex-shrink: 0;
    background: #ffffff;
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+   box-shadow: none;
    position: relative;
    overflow: hidden;
    display: flex;
@@ -74,11 +46,31 @@
    margin: 0 auto;
   }
 
+  @page {
+   size: A4 portrait;
+   margin: 0mm;
+  }
+
+  @media print {
+   body {
+    background-color: #ffffff;
+    min-width: 100%;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+   }
+   #wtn-document {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+   }
+  }
+
+  /* ---- HEADER SECTION ---- */
   .header-section {
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 20px 15mm 0px 20mm;
+   padding: 15px 20mm 5px 20mm;
   }
 
   .header-left {
@@ -89,12 +81,12 @@
    background: #0b4f28;
    color: white;
    display: inline-block;
-   padding: 3px 12px;
-   font-size: 12px;
+   padding: 4px 12px;
+   font-size: 13px;
    font-weight: 700;
    font-style: italic;
    letter-spacing: 0.5px;
-   margin-bottom: 4px;
+   margin-bottom: 6px;
    border-radius: 5px;
   }
 
@@ -117,13 +109,13 @@
    font-weight: 800;
    color: #1e293b;
    margin-top: 2px;
-   padding-bottom: 8px;
+   padding-bottom: 10px;
    border-bottom: 1px solid #cbd5e1;
    width: 100%;
   }
 
   .logo-container {
-   width: 130px;
+   width: 140px;
    display: flex;
    justify-content: flex-end;
    align-items: center;
@@ -135,17 +127,17 @@
    height: auto;
   }
 
+  /* ---- TIMELINE BODY ---- */
   .doc-body {
-   padding: 5px 20mm 0px 20mm;
+   padding: 10px 20mm 0px 20mm;
    position: relative;
-   flex: 1;
   }
 
   .timeline-line {
    position: absolute;
    left: calc(20mm + 20px);
    top: 15px;
-   bottom: 125px; 
+   bottom: 30px; 
    width: 1px;
    background: #dae4de;
    z-index: 1;
@@ -154,7 +146,7 @@
   .timeline-item {
    display: flex;
    gap: 15px;
-   margin-bottom: 15px;
+   margin-bottom: 12px;
    position: relative;
    z-index: 2;
   }
@@ -181,19 +173,19 @@
   .timeline-header {
    font-family: 'Oswald', sans-serif;
    color: #0b4f28;
-   font-size: 17px;
+   font-size: 18px;
    font-weight: 600;
    text-transform: uppercase;
    border-bottom: 2px solid #88a795;
    display: inline-block;
    padding-bottom: 4px;
-   margin-bottom: 4px;
+   margin-bottom: 6px;
    letter-spacing: 0.5px;
   }
 
   .data-row {
    font-size: 13px;
-   margin-bottom: 2px;
+   margin-bottom: 4px;
    color: #1e293b;
    line-height: 1.4;
   }
@@ -208,11 +200,13 @@
    color: #475569;
   }
 
+  /* ---- SIGNATURES ---- */
   .signatures-section {
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
-   padding: 0px 20mm 15px 20mm;
+   padding: 10px 20mm 15px 20mm;
+   margin-top: auto;
    position: relative;
    z-index: 2;
   }
@@ -225,7 +219,7 @@
    background: #0b4f28;
    color: white;
    text-align: center;
-   padding: 5px;
+   padding: 6px;
    font-size: 11px;
    font-weight: 700;
    border-radius: 6px 6px 0 0;
@@ -234,7 +228,7 @@
   .sig-body {
    border: 1px solid #0b4f28;
    border-top: none;
-   height: 70px;
+   height: 65px;
    background: #ffffff;
    display: flex;
    align-items: center;
@@ -249,7 +243,7 @@
   }
 
   .sig-footer {
-   margin-top: 4px;
+   margin-top: 6px;
    font-size: 12px;
    line-height: 1.6;
   }
@@ -298,8 +292,9 @@
    line-height: 1.2;
   }
 
+  /* ---- FOOTER ---- */
   .promise-box {
-   margin: 0 20mm 8px 20mm;
+   margin: 0 20mm 10px 20mm;
    border: 1px solid #0b4f28;
    border-radius: 8px;
    display: flex;
@@ -311,8 +306,8 @@
   .promise-icon {
    background: #0b4f28;
    color: white;
-   width: 32px;
-   height: 32px;
+   width: 35px;
+   height: 35px;
    border-radius: 6px;
    display: flex;
    align-items: center;
@@ -343,7 +338,7 @@
    display: flex;
    justify-content: space-around;
    align-items: center;
-   padding: 10px 20mm; /* Tightened */
+   padding: 10px 20mm;
    width: 100%;
   }
 
@@ -373,12 +368,6 @@
 
 <body>
 
- <div class="action-controls" id="download-controls">
-  <button class="btn-download" onclick="downloadPDF()">
-   <i class="fa-solid fa-download"></i> Download PDF
-  </button>
- </div>
-
  <div id="wtn-document">
 
   <!-- HEADER -->
@@ -396,6 +385,7 @@
 
   <div class="doc-body">
 
+   <!-- Timeline Connecting Line -->
    <div class="timeline-line"></div>
 
    <!-- Section 1 -->
@@ -468,10 +458,10 @@
   <!-- SIGNATURES -->
   <div class="signatures-section">
 
+   <!-- Owner Signature -->
    <div class="sig-box">
     <div class="sig-header">WASTE OWNER SIGNATURE</div>
     <div class="sig-body">
-
      <img id="sig-img-owner" src="https://themesrare.github.io/temp/ja/wtn/images/signature.png" alt="Owner Signature">
     </div>
     <div class="sig-footer">
@@ -486,7 +476,7 @@
     </div>
    </div>
 
-
+   <!-- Center Note -->
    <div class="sig-middle">
     <i class="fa-solid fa-recycle"></i>
     <p>THANK YOU<br>FOR HELPING US<br>KEEP OUR PLANET<br>CLEAN & GREEN.</p>
@@ -496,7 +486,6 @@
    <div class="sig-box">
     <div class="sig-header">COLLECTOR SIGNATURE</div>
     <div class="sig-body">
-
      <img id="sig-img-collector" src="https://themesrare.github.io/temp/ja/wtn/images/signature.png" alt="Collector Signature">
     </div>
     <div class="sig-footer">
@@ -513,14 +502,14 @@
 
   </div>
 
-
+  <!-- PROMISE BOX -->
   <div class="promise-box">
    <div class="promise-icon"><i class="fa-solid fa-leaf"></i></div>
    <div class="promise-title">OUR PROMISE</div>
    <div class="promise-text">JunksAway and our partners are committed to responsible<br>waste management and recycling wherever possible.</div>
   </div>
 
-
+  <!-- FOOTER -->
   <div class="footer-bar">
    <div class="footer-item"><i class="fa-solid fa-phone"></i> 020 3051 5122</div>
    <div class="footer-item" style="border-left: 1px solid rgba(255,255,255,0.4); border-right: 1px solid rgba(255,255,255,0.4); padding: 0 15px;">
@@ -532,42 +521,12 @@
    <div class="footer-item"><i class="fa-solid fa-location-dot"></i> London • Essex • Hertfordshire • Surrey</div>
   </div>
 
-
+  <!-- LEGAL -->
   <div class="footer-legal">
    JUNKSAWAY LTD &nbsp;|&nbsp; Environment Agency Registration: CBDU375738 &nbsp;|&nbsp; Company Registration No: 10882506
   </div>
 
  </div>
 
- <script>
-  function downloadPDF() {
-   const dlControls = document.getElementById('download-controls');
-   const element = document.getElementById('wtn-document');
-
-   dlControls.style.display = 'none';
-   element.style.boxShadow = 'none';
-
-   html2canvas(element, {
-    scale: 2,
-    useCORS: true,
-    scrollY: 0
-   }).then(canvas => {
-    const imgData = canvas.toDataURL('image/jpeg', 1.0);
-    const {
-     jsPDF
-    } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save('WTN-Transfer-Note.pdf');
-    dlControls.style.display = 'flex';
-    element.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-   });
-  }
-
- </script>
-
 </body>
-
 </html>

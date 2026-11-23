@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R Alam Enterprise — Brand Identity &amp; Logo Showcase</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans (Weights 400, 500, 600, 700, 800) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#0A2540',
+              orange: '#EA580C',
+              steel: '#475569',
+              ice: '#F8FAFC',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- System-Synced Light/Dark Mode Detection (Runs Before Paint) -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('ralam-theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    /* ==========================================================================
+       1. ADAPTIVE LOGO COLOR TOKENS
+       ========================================================================== */
+    :root {
+      --c-navy: #0A2540;
+      --c-deep-steel: #2B3B4E;
+      --c-steel: #475569;
+      --c-orange: #EA580C;
+      --c-orange-dark: #9A3412;
+      --c-sec-opacity: 1;
+    }
+
+    html.dark {
+      --c-navy: #F8FAFC;
+      --c-deep-steel: #CBD5E1;
+      --c-steel: #94A3B8;
+      --c-orange: #EA580C;
+      --c-orange-dark: #C2410C;
+      --c-sec-opacity: 1;
+    }
+
+    html, body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================================================
+       2. FIXED-SURFACE LOGO OVERRIDES
+       ========================================================================== */
+    .brand-mark {
+      display: block;
+      overflow: visible;
+    }
+
+    /* Original Light Surface Palette */
+    .brand-mark.logo-light {
+      --c-navy: #0A2540;
+      --c-deep-steel: #2B3B4E;
+      --c-steel: #475569;
+      --c-orange: #EA580C;
+      --c-orange-dark: #9A3412;
+      --c-sec-opacity: 1;
+    }
+
+    /* Dark Surface & Dark Mode Adapted Palette */
+    .brand-mark.logo-dark {
+      --c-navy: #F8FAFC;
+      --c-deep-steel: #CBD5E1;
+      --c-steel: #94A3B8;
+      --c-orange: #EA580C;
+      --c-orange-dark: #C2410C;
+      --c-sec-opacity: 1;
+    }
+
+    /* Monochrome Navy (1-Color Print / Stamps) */
+    .brand-mark.logo-mono-navy {
+      --c-navy: #0A2540;
+      --c-deep-steel: #334155;
+      --c-steel: #475569;
+      --c-orange: #0A2540;
+      --c-orange-dark: #334155;
+      --c-sec-opacity: 1;
+    }
+
+    /* Reversed White (Signal Orange / Dark Stencil) */
+    .brand-mark.logo-mono-white {
+      --c-navy: #FFFFFF;
+      --c-deep-steel: #FFFFFF;
+      --c-steel: #FFFFFF;
+      --c-orange: #FFFFFF;
+      --c-orange-dark: #FFFFFF;
+      --c-sec-opacity: 0.68;
+    }
+
+    /* ==========================================================================
+       3. PIXEL-PERFECT FLUSH-ALIGNED WORDMARK COMPONENT
+          Left edge of 'R' aligns with 'E'; Right edge of 'M' aligns with final 'E'
+       ========================================================================== */
+    .brand-wordmark {
+      display: inline-flex;
+      flex-direction: column;
+      width: fit-content;
+      user-select: none;
+    }
+
+    .brand-wordmark .wm-top {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      white-space: nowrap;
+      margin-right: -0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-wordmark .wm-bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.34em;
+      line-height: 1;
+      margin-top: 0.28em;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       4. INTERACTIVE CONCEPT LAYER ISOLATION
+       ========================================================================== */
+    .anatomy-svg[data-focus="construction"] {
+      --op-marine: 0.14;
+      --op-roadwork: 0.14;
+    }
+    .anatomy-svg[data-focus="marine"] {
+      --op-construction: 0.14;
+      --op-roadwork: 0.14;
+    }
+    .anatomy-svg[data-focus="roadwork"] {
+      --op-construction: 0.14;
+      --op-marine: 0.14;
+    }
+
+    /* Architectural Clear-Space Grid Pattern */
+    .grid-blueprint {
+      background-image:
+        linear-gradient(to right, rgba(234, 88, 12, 0.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(234, 88, 12, 0.10) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .grid-blueprint {
+      background-image:
+        linear-gradient(to right, rgba(234, 88, 12, 0.16) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(234, 88, 12, 0.16) 1px, transparent 1px);
+    }
+  </style>
+</head>
+
+<body class="bg-white text-[#0A2540] dark:bg-black dark:text-white transition-colors duration-200 selection:bg-[#EA580C] selection:text-white">
+
+  <!-- ========================================================================
+       DUAL INLINE SVG SYMBOL DEFINITIONS (EXACT V1 & V2 512x512 GEOMETRY)
+       Switching between #logo-v1 and #logo-v2 updates every logo globally.
+       ======================================================================== -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="hidden" aria-hidden="true">
+    <defs>
+      <!-- V1: Classic Detailed -->
+      <symbol id="logo-v1" viewBox="0 0 512 512">
+        <g class="layer-construction" style="opacity: var(--op-construction, 1); transition: opacity 0.25s ease;">
+          <polygon fill="var(--c-navy)" points="53,210 89,189 89,325 53,332"/>
+          <polygon fill="var(--c-navy)" points="96,134 136,111 136,269 118,275 118,202 96,189"/>
+          <polygon fill="var(--c-navy)" points="96,189 118,202 118,275 96,282"/>
+          <polygon fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" points="144,111 182,134 182,255 144,267"/>
+          <polygon fill="var(--c-navy)" points="160,66 208,36 208,246 189,252 189,130 160,112"/>
+          <polygon fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" points="216,40 257,66 257,231 216,244"/>
+          <polygon fill="var(--c-navy)" points="265,92 306,118 306,193 294,193 276,199 276,224 265,228"/>
+        </g>
+        <g class="layer-marine" style="opacity: var(--op-marine, 1); transition: opacity 0.25s ease;">
+          <g fill="var(--c-navy)">
+            <polygon points="96,292 136,279 136,294 96,305"/>
+            <polygon points="142,277 184,263 184,280 142,292"/>
+            <polygon points="190,261 236,245 236,266 190,279"/>
+            <polygon points="242,243 290,227 290,251 242,264"/>
+            <polygon points="96,311 136,300 136,315 96,324"/>
+            <polygon points="142,298 184,286 184,305 142,314"/>
+            <polygon points="190,285 236,272 236,293 190,303"/>
+            <polygon points="242,270 290,257 290,265 272,270 258,290 242,293"/>
+          </g>
+          <path fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" d="M320,204 V180 C324,176 333,175 338,177 V205 Z"/>
+          <rect fill="var(--c-navy)" x="347" y="158" width="7" height="48"/>
+          <polygon fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" points="284,206 296,200 296,214 314,215 314,258 298,262 298,219 284,218"/>
+          <path fill="var(--c-navy)" fill-rule="evenodd" d="M296,200 L400,206 V219 L390,222 V244 L314,258 V215 L296,214 Z M323,213 L338,214 V229 L323,228 Z M345,214.5 L360,215.5 V230 L345,229 Z M367,216 L381,217 V231 L367,230 Z"/>
+          <path fill="var(--c-orange)" d="M53,341 L258,298 L276,276 C322,265 372,255 412,251 C390,295 377,345 376,388 C288,348 168,340 64,360 Z"/>
+          <path fill="var(--c-orange-dark)" fill-opacity="var(--c-sec-opacity)" d="M412,251 C419,254 426,257 430,261 C422,285 384,330 376,388 C377,345 390,295 412,251 Z"/>
+        </g>
+        <g class="layer-roadwork" style="opacity: var(--op-roadwork, 1); transition: opacity 0.25s ease;">
+          <path fill="var(--c-navy)" fill-rule="evenodd" d="M32,378 C155,344 300,354 395,408 C422,424 434,446 435,470 H230 C256,446 226,410 156,390 C112,378 68,375 32,378 Z M136,371 L164,372 L162,375 L136,373 Z M184,373 L216,377 L212,382 L182,377 Z M236,382 L270,392 L263,398 L231,387 Z M290,400 C304,407 315,414 323,422 L310,423 C302,416 292,409 280,404 Z M334,437 C342,448 346,458 347,470 H336 C335,459 331,448 323,438 Z"/>
+        </g>
+      </symbol>
+
+      <!-- V2: Architectural Minimal -->
+      <symbol id="logo-v2" viewBox="0 0 512 512">
+        <g class="layer-construction" style="opacity: var(--op-construction, 1); transition: opacity 0.25s ease;">
+          <polygon points="95,291 95,261 129,246 129,203 149,194 149,267" fill="var(--c-navy)" />
+          <polygon points="163,260 163,142 198,124 198,147 183,155 183,251" fill="var(--c-navy)" />
+          <polygon points="198,244 198,78 255,46 255,218 233,228 233,82 218,91 218,235" fill="var(--c-navy)" />
+          <polygon points="255,46 298,70 298,198 255,218" fill="var(--c-deep-steel)" fill-opacity="var(--c-sec-opacity)" />
+          <polygon points="311,115 333,126 333,161 361,161 361,189 331,183 311,192" fill="var(--c-deep-steel)" fill-opacity="var(--c-sec-opacity)" />
+        </g>
+        <g class="layer-marine" style="opacity: var(--op-marine, 1); transition: opacity 0.25s ease;">
+          <polygon points="74,316 129,292 129,322 66,349" fill="var(--c-navy)" />
+          <polygon points="144,285 178,269 178,303 144,316" fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" />
+          <polygon points="192,263 226,247 226,284 192,297" fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" />
+          <polygon points="240,240 274,225 274,265 240,279" fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" />
+          <polygon points="288,218 331,198 331,243 288,260" fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" />
+          <path d="M331 198 L417 218 L417 227 Q374 231 331 243 Z" fill="var(--c-navy)" />
+          <path d="M59 366 C185 314 315 252 432 240 L358 411 C262 366 158 354 61 377 Z" fill="var(--c-orange)" />
+          <path d="M432 240 C454 254 456 274 442 294 L358 411 Z" fill="var(--c-orange-dark)" fill-opacity="var(--c-sec-opacity)" />
+        </g>
+        <g class="layer-roadwork" style="opacity: var(--op-roadwork, 1); transition: opacity 0.25s ease;">
+          <path d="M59 385 C165 370 275 395 392 462 L302 462 C228 408 145 381 59 385 Z" fill="var(--c-steel)" fill-opacity="var(--c-sec-opacity)" />
+          <path d="M59 389 C135 388 200 408 262 462 L186 462 C148 412 108 394 59 389 Z" fill="var(--c-navy)" />
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ========================================================================
+       STICKY MOBILE-PROOF TOP NAVBAR (NO LOGO ICON, ZERO OVERFLOW)
+       ======================================================================== -->
+  <header class="sticky top-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-[#E5E5E7] dark:border-[#262629] transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
+      <!-- Left: Pure Typography Only (No Logo Icon) -->
+      <a href="#hero" class="min-w-0 flex flex-col sm:flex-row sm:items-center sm:gap-2.5">
+        <span class="text-xs sm:text-sm font-extrabold tracking-[0.04em] text-[#0A2540] dark:text-white truncate">
+          R ALAM ENTERPRISE
+        </span>
+        <span class="hidden sm:inline text-[#CBD5E1] dark:text-[#3F3F46]">/</span>
+        <span class="text-[10px] sm:text-xs font-semibold text-[#EA580C] sm:text-[#475569] sm:dark:text-neutral-400 leading-tight truncate">
+          Logo Showcase
+        </span>
+      </a>
+
+      <!-- Center: Desktop Section Navigation -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Section Navigation">
+        <a href="#hero" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#475569] dark:text-neutral-400 hover:text-[#0A2540] dark:hover:text-white hover:bg-[#F8FAFC] dark:hover:bg-[#141416] transition-colors">Overview</a>
+        <a href="#concept" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#475569] dark:text-neutral-400 hover:text-[#0A2540] dark:hover:text-white hover:bg-[#F8FAFC] dark:hover:bg-[#141416] transition-colors">Concept</a>
+        <a href="#lockups" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#475569] dark:text-neutral-400 hover:text-[#0A2540] dark:hover:text-white hover:bg-[#F8FAFC] dark:hover:bg-[#141416] transition-colors">Lockups</a>
+        <a href="#colors" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#475569] dark:text-neutral-400 hover:text-[#0A2540] dark:hover:text-white hover:bg-[#F8FAFC] dark:hover:bg-[#141416] transition-colors">Colors</a>
+        <a href="#typography" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#475569] dark:text-neutral-400 hover:text-[#0A2540] dark:hover:text-white hover:bg-[#F8FAFC] dark:hover:bg-[#141416] transition-colors">Typography</a>
+        <a href="#applications" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#475569] dark:text-neutral-400 hover:text-[#0A2540] dark:hover:text-white hover:bg-[#F8FAFC] dark:hover:bg-[#141416] transition-colors">Applications</a>
+      </nav>
+
+      <!-- Right: Global [ V1 | V2 ] Switcher + Light/Dark Mode Toggle -->
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Segmented V1 / V2 Pill Switch -->
+        <div
+          class="inline-flex items-center p-0.5 rounded-xl bg-[#F8FAFC] dark:bg-[#141416] border border-[#E5E5E7] dark:border-[#262629]"
+          role="group"
+          aria-label="Switch Logo Version"
+        >
+          <button
+            type="button"
+            data-version="v1"
+            class="version-btn px-3 py-1.5 rounded-[10px] text-xs font-extrabold tracking-wide transition-colors cursor-pointer"
+          >
+            V1
+          </button>
+          <button
+            type="button"
+            data-version="v2"
+            class="version-btn px-3 py-1.5 rounded-[10px] text-xs font-extrabold tracking-wide transition-colors cursor-pointer"
+          >
+            V2
+          </button>
+        </div>
+
+        <!-- Light / Dark Theme Toggle -->
+        <button
+          id="themeToggleBtn"
+          type="button"
+          class="w-9 h-9 rounded-xl border border-[#E5E5E7] dark:border-[#262629] bg-[#F8FAFC] dark:bg-[#141416] text-[#0A2540] dark:text-white hover:border-[#0A2540] dark:hover:border-neutral-500 flex items-center justify-center transition-colors cursor-pointer"
+          aria-label="Toggle Light and Dark Mode"
+          title="Switch Light / Dark Mode"
+        >
+          <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- ======================================================================
+         HERO SECTION: SURFACE PREVIEW + SYMBOL ONLY TOGGLE
+         ====================================================================== -->
+    <section id="hero" class="py-10 sm:py-16 lg:py-20 border-b border-[#E5E5E7] dark:border-[#262629]">
+      <!-- Intro Header -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-8 sm:mb-10">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F8FAFC] dark:bg-[#141416] border border-[#E5E5E7] dark:border-[#262629] text-[11px] font-bold uppercase tracking-[0.16em] text-[#EA580C] mb-3.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#EA580C]"></span>
+            Brand Identity Showcase
+          </div>
+          <h1 class="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-[-0.03em] leading-[1.06] text-[#0A2540] dark:text-white">
+            R Alam Enterprise
+          </h1>
+          <p class="mt-3 text-sm sm:text-base text-[#475569] dark:text-neutral-400 font-medium leading-relaxed">
+            Visual identity guidelines for Civil Construction, Roadwork Infrastructure, and Marine Bulkhead Logistics. Use the top <strong class="text-[#0A2540] dark:text-white">V1 / V2</strong> switch to preview both emblem directions live.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2.5 text-xs font-semibold text-[#475569] dark:text-neutral-400">
+          <span class="px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629]">
+            Active: <strong id="heroVersionLabel" class="text-[#0A2540] dark:text-white">V1</strong>
+          </span>
+          <span class="px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629]">
+            Plus Jakarta Sans
+          </span>
+        </div>
+      </div>
+
+      <!-- Interactive Stage Card -->
+      <div
+        id="heroStage"
+        class="rounded-3xl border border-[#E5E5E7] dark:border-[#262629] bg-white transition-colors duration-200 overflow-hidden"
+      >
+        <!-- Stage Top Bar -->
+        <div id="heroStageHeader" class="flex items-center justify-between gap-2 px-4 sm:px-6 py-3.5 border-b border-black/5">
+          <span id="heroSurfaceLabel" class="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-[#475569] truncate">
+            Pure White (#FFFFFF)
+          </span>
+          <span id="heroModeLabel" class="text-[10px] sm:text-[11px] font-semibold text-[#475569] shrink-0">
+            Full Lockup
+          </span>
+        </div>
+
+        <!-- Centered Live Logo Canvas -->
+        <div class="px-5 sm:px-12 py-14 sm:py-24 lg:py-28 flex items-center justify-center min-h-[260px] sm:min-h-[340px]">
+          <div id="heroLockupContainer" class="flex flex-col sm:flex-row items-center gap-5 sm:gap-9">
+            <!-- Emblem -->
+            <svg
+              id="heroLogoSvg"
+              class="brand-mark logo-light w-32 h-32 sm:w-40 sm:h-40 lg:w-44 lg:h-44 shrink-0 transition-all duration-200"
+              aria-label="R Alam Enterprise Emblem"
+            >
+              <use class="logo-use" href="#logo-v1"></use>
+            </svg>
+
+            <!-- Pixel-Perfect Flush-Aligned Wordmark -->
+            <div id="heroWordmarkWrap" class="flex flex-col items-center sm:items-start">
+              <div class="brand-wordmark text-[38px] sm:text-[50px] lg:text-[58px]">
+                <span id="heroWmTop" class="wm-top text-[#0A2540] transition-colors duration-200">R ALAM</span>
+                <span id="heroWmBottom" class="wm-bottom text-[#EA580C] transition-colors duration-200" aria-label="ENTERPRISE">
+                  <span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span>
+                </span>
+              </div>
+              <div id="heroDivider" class="h-px w-full bg-[#0A2540]/15 my-3 transition-colors duration-200"></div>
+              <div id="heroTagline" class="text-[9px] sm:text-[11px] font-bold tracking-[0.18em] uppercase text-[#475569] text-center sm:text-left transition-colors duration-200">
+                CONSTRUCTION • ROADWORK • MARINE
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thumb-Friendly Control Bar: Mode Toggle + Surface Swatches -->
+        <div class="px-4 sm:px-6 py-4 bg-[#F8FAFC] dark:bg-[#0C0C0E] border-t border-[#E5E5E7] dark:border-[#262629] flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5">
+          <!-- Mode Toggle: Full Lockup | Symbol Only -->
+          <div
+            class="inline-flex p-1 rounded-xl bg-white dark:bg-[#141416] border border-[#E5E5E7] dark:border-[#262629] self-center md:self-auto"
+            role="group"
+            aria-label="Display Mode"
+          >
+            <button
+              type="button"
+              id="modeFullBtn"
+              onclick="setHeroMode('full')"
+              class="px-3.5 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer"
+            >
+              Full Lockup
+            </button>
+            <button
+              type="button"
+              id="modeSymbolBtn"
+              onclick="setHeroMode('symbol')"
+              class="px-3.5 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer"
+            >
+              Symbol Only
+            </button>
+          </div>
+
+          <!-- Surface Swatches -->
+          <div class="flex flex-wrap items-center justify-center gap-2" role="group" aria-label="Surface Preview Swatches">
+            <button type="button" data-surface="white" class="surface-btn inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#141416] text-[#0A2540] dark:text-white border transition-colors cursor-pointer">
+              <span class="w-3.5 h-3.5 rounded-full bg-white border border-slate-300"></span>
+              <span>White</span>
+            </button>
+            <button type="button" data-surface="ice" class="surface-btn inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#141416] text-[#0A2540] dark:text-white border transition-colors cursor-pointer">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#F8FAFC] border border-slate-300"></span>
+              <span>Ice Gray</span>
+            </button>
+            <button type="button" data-surface="navy" class="surface-btn inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#141416] text-[#0A2540] dark:text-white border transition-colors cursor-pointer">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#0A2540]"></span>
+              <span>Navy</span>
+            </button>
+            <button type="button" data-surface="black" class="surface-btn inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#141416] text-[#0A2540] dark:text-white border transition-colors cursor-pointer">
+              <span class="w-3.5 h-3.5 rounded-full bg-black border border-neutral-600"></span>
+              <span>Black</span>
+            </button>
+            <button type="button" data-surface="orange" class="surface-btn inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#141416] text-[#0A2540] dark:text-white border transition-colors cursor-pointer">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#EA580C]"></span>
+              <span>Orange</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 01: BRAND CONCEPT (ZERO-SCROLL MOBILE INTERACTION)
+         ====================================================================== -->
+    <section id="concept" class="py-14 sm:py-20 border-b border-[#E5E5E7] dark:border-[#262629]">
+      <div class="mb-8 sm:mb-12">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#EA580C] mb-2">01 / Brand Concept</p>
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-[-0.025em] text-[#0A2540] dark:text-white">
+          Anatomy of the Emblem
+        </h2>
+        <p class="mt-2.5 text-sm sm:text-base text-[#475569] dark:text-neutral-400 max-w-2xl">
+          Tap or select any pillar to isolate how Civil Construction, Marine Shipping, and Roadwork unite into one geometric mark.
+        </p>
+      </div>
+
+      <!-- Desktop 2-Column | Mobile Single-Viewport Stack -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+        <!-- DESKTOP LEFT COLUMN: Interactive Pillar Cards (>= 768px) -->
+        <div class="hidden md:flex md:col-span-6 lg:col-span-5 flex-col gap-3.5 justify-between">
+          <button
+            type="button"
+            data-layer="all"
+            class="concept-desktop-btn text-left rounded-2xl p-5 border transition-colors cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#EA580C]">Unified Mark</span>
+              <span class="text-[11px] font-bold text-[#475569] dark:text-neutral-400">All Layers</span>
+            </div>
+            <h3 class="text-base font-extrabold text-[#0A2540] dark:text-white mt-1">Complete Integrated Emblem</h3>
+            <p class="text-xs text-[#475569] dark:text-neutral-400 mt-1.5 leading-relaxed">
+              Three core infrastructure divisions balanced in one forward-moving geometric silhouette.
+            </p>
+          </button>
+
+          <button
+            type="button"
+            data-layer="construction"
+            class="concept-desktop-btn text-left rounded-2xl p-5 border transition-colors cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#EA580C]">01 • Construction</span>
+              <span class="text-[11px] font-bold text-[#475569] dark:text-neutral-400">Skyline</span>
+            </div>
+            <h3 class="text-base font-extrabold text-[#0A2540] dark:text-white mt-1">Stepped Architectural Towers</h3>
+            <p class="text-xs text-[#475569] dark:text-neutral-400 mt-1.5 leading-relaxed">
+              Rising vertical silhouettes representing structural permanence, civil contracting, and upward growth.
+            </p>
+          </button>
+
+          <button
+            type="button"
+            data-layer="marine"
+            class="concept-desktop-btn text-left rounded-2xl p-5 border transition-colors cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#EA580C]">02 • Marine Logistics</span>
+              <span class="text-[11px] font-bold text-[#475569] dark:text-neutral-400">Vessel</span>
+            </div>
+            <h3 class="text-base font-extrabold text-[#0A2540] dark:text-white mt-1">Cargo &amp; Bulkhead Vessel</h3>
+            <p class="text-xs text-[#475569] dark:text-neutral-400 mt-1.5 leading-relaxed">
+              Signal Orange hull and modular cargo deck reflecting maritime tonnage and reliable river transport.
+            </p>
+          </button>
+
+          <button
+            type="button"
+            data-layer="roadwork"
+            class="concept-desktop-btn text-left rounded-2xl p-5 border transition-colors cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#EA580C]">03 • Roadwork</span>
+              <span class="text-[11px] font-bold text-[#475569] dark:text-neutral-400">Foundation</span>
+            </div>
+            <h3 class="text-base font-extrabold text-[#0A2540] dark:text-white mt-1">Sweeping Highway Arc</h3>
+            <p class="text-xs text-[#475569] dark:text-neutral-400 mt-1.5 leading-relaxed">
+              Dynamic curved base symbolizing road infrastructure, forward momentum, and national connectivity.
+            </p>
+          </button>
+        </div>
+
+        <!-- ANATOMY CANVAS (Top on Mobile, Right Column on Desktop) -->
+        <div class="md:col-span-6 lg:col-span-7 flex flex-col gap-4">
+          <div class="rounded-3xl bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629] p-6 sm:p-10 flex flex-col items-center justify-center flex-1 min-h-[260px] sm:min-h-[380px]">
+            <svg
+              id="anatomySvg"
+              class="brand-mark anatomy-svg w-48 h-48 sm:w-64 sm:h-64 lg:w-72 lg:h-72"
+              data-focus="all"
+              aria-label="Interactive Logo Anatomy"
+            >
+              <use class="logo-use" href="#logo-v1"></use>
+            </svg>
+            <p id="anatomyDesktopCaption" class="hidden md:block text-xs font-semibold text-[#475569] dark:text-neutral-400 mt-6 text-center">
+              Unified Mark — All 3 operational pillars active
+            </p>
+          </div>
+
+          <!-- MOBILE-ONLY COMPACT PILL BAR + ACTIVE DESCRIPTION (ZERO SCROLLING!) -->
+          <div class="md:hidden space-y-3">
+            <div class="grid grid-cols-4 gap-1.5 p-1 rounded-2xl bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629]" role="tablist">
+              <button type="button" data-layer="all" class="concept-mobile-pill py-2.5 px-1 rounded-xl text-[11px] font-bold text-center transition-colors cursor-pointer">All</button>
+              <button type="button" data-layer="construction" class="concept-mobile-pill py-2.5 px-1 rounded-xl text-[11px] font-bold text-center transition-colors cursor-pointer">Build</button>
+              <button type="button" data-layer="marine" class="concept-mobile-pill py-2.5 px-1 rounded-xl text-[11px] font-bold text-center transition-colors cursor-pointer">Marine</button>
+              <button type="button" data-layer="roadwork" class="concept-mobile-pill py-2.5 px-1 rounded-xl text-[11px] font-bold text-center transition-colors cursor-pointer">Road</button>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629]">
+              <div id="mobileConceptBadge" class="text-[10px] font-bold uppercase tracking-[0.14em] text-[#EA580C]">Unified Mark</div>
+              <h3 id="mobileConceptTitle" class="text-sm font-extrabold text-[#0A2540] dark:text-white mt-1">Complete Integrated Emblem</h3>
+              <p id="mobileConceptDesc" class="text-xs text-[#475569] dark:text-neutral-400 mt-1 leading-relaxed">
+                Three core infrastructure divisions balanced in one forward-moving geometric silhouette.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 02: LOGO LOCKUPS & CLEAR SPACE
+         ====================================================================== -->
+    <section id="lockups" class="py-14 sm:py-20 border-b border-[#E5E5E7] dark:border-[#262629]">
+      <div class="mb-8 sm:mb-12">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#EA580C] mb-2">02 / Logo System</p>
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-[-0.025em] text-[#0A2540] dark:text-white">
+          Lockups &amp; Clear Space
+        </h2>
+        <p class="mt-2.5 text-sm sm:text-base text-[#475569] dark:text-neutral-400 max-w-2xl">
+          Flush-aligned lockups calibrated for light surfaces, dark interfaces, monochrome print, and stencil applications.
+        </p>
+      </div>
+
+      <!-- 6 Official Lockup Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+        <!-- 1. Horizontal Light -->
+        <div class="rounded-3xl border border-[#E5E5E7] dark:border-[#262629] overflow-hidden bg-white dark:bg-[#0C0C0E] flex flex-col">
+          <div class="h-48 sm:h-52 bg-white flex items-center justify-center p-6 border-b border-[#E5E5E7] dark:border-[#262629]">
+            <div class="flex items-center gap-4">
+              <svg class="brand-mark logo-light w-14 h-14 sm:w-16 sm:h-16 shrink-0"><use class="logo-use" href="#logo-v1"></use></svg>
+              <div class="brand-wordmark text-[24px] sm:text-[26px]">
+                <span class="wm-top text-[#0A2540]">R ALAM</span>
+                <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-[#0A2540] dark:text-white">Horizontal — Light</h3>
+              <p class="text-xs text-[#475569] dark:text-neutral-400 mt-0.5">Primary corporate lockup</p>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#F8FAFC] dark:bg-[#141416] text-[#0A2540] dark:text-neutral-300 border border-[#E5E5E7] dark:border-[#262629]">Primary</span>
+          </div>
+        </div>
+
+        <!-- 2. Horizontal Dark Adapted -->
+        <div class="rounded-3xl border border-[#E5E5E7] dark:border-[#262629] overflow-hidden bg-white dark:bg-[#0C0C0E] flex flex-col">
+          <div class="h-48 sm:h-52 bg-[#0A2540] flex items-center justify-center p-6 border-b border-[#E5E5E7] dark:border-[#262629]">
+            <div class="flex items-center gap-4">
+              <svg class="brand-mark logo-dark w-14 h-14 sm:w-16 sm:h-16 shrink-0"><use class="logo-use" href="#logo-v1"></use></svg>
+              <div class="brand-wordmark text-[24px] sm:text-[26px]">
+                <span class="wm-top text-[#F8FAFC]">R ALAM</span>
+                <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-[#0A2540] dark:text-white">Horizontal — Dark Adapted</h3>
+              <p class="text-xs text-[#475569] dark:text-neutral-400 mt-0.5">Deep Navy &amp; Dark Mode UI</p>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#0A2540] text-white">Adaptive</span>
+          </div>
+        </div>
+
+        <!-- 3. Stacked Light -->
+        <div class="rounded-3xl border border-[#E5E5E7] dark:border-[#262629] overflow-hidden bg-white dark:bg-[#0C0C0E] flex flex-col">
+          <div class="h-48 sm:h-52 bg-[#F8FAFC] flex flex-col items-center justify-center p-6 border-b border-[#E5E5E7] dark:border-[#262629]">
+            <svg class="brand-mark logo-light w-16 h-16 sm:w-20 sm:h-20 mb-3"><use class="logo-use" href="#logo-v1"></use></svg>
+            <div class="brand-wordmark text-[20px]">
+              <span class="wm-top text-[#0A2540]">R ALAM</span>
+              <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-[#0A2540] dark:text-white">Stacked — Light</h3>
+              <p class="text-xs text-[#475569] dark:text-neutral-400 mt-0.5">Covers, badges &amp; vertical layouts</p>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#F8FAFC] dark:bg-[#141416] text-[#0A2540] dark:text-neutral-300 border border-[#E5E5E7] dark:border-[#262629]">Stacked</span>
+          </div>
+        </div>
+
+        <!-- 4. Stacked Dark Adapted -->
+        <div class="rounded-3xl border border-[#E5E5E7] dark:border-[#262629] overflow-hidden bg-white dark:bg-[#0C0C0E] flex flex-col">
+          <div class="h-48 sm:h-52 bg-black flex flex-col items-center justify-center p-6 border-b border-[#E5E5E7] dark:border-[#262629]">
+            <svg class="brand-mark logo-dark w-16 h-16 sm:w-20 sm:h-20 mb-3"><use class="logo-use" href="#logo-v1"></use></svg>
+            <div class="brand-wordmark text-[20px]">
+              <span class="wm-top text-[#F8FAFC]">R ALAM</span>
+              <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-[#0A2540] dark:text-white">Stacked — Obsidian</h3>
+              <p class="text-xs text-[#475569] dark:text-neutral-400 mt-0.5">OLED screens &amp; night signage</p>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-black text-white border border-neutral-700">Dark</span>
+          </div>
+        </div>
+
+        <!-- 5. Monochrome Navy -->
+        <div class="rounded-3xl border border-[#E5E5E7] dark:border-[#262629] overflow-hidden bg-white dark:bg-[#0C0C0E] flex flex-col">
+          <div class="h-48 sm:h-52 bg-[#F8FAFC] flex items-center justify-center p-6 border-b border-[#E5E5E7] dark:border-[#262629]">
+            <div class="flex items-center gap-4">
+              <svg class="brand-mark logo-mono-navy w-14 h-14 sm:w-16 sm:h-16 shrink-0"><use class="logo-use" href="#logo-v1"></use></svg>
+              <div class="brand-wordmark text-[24px] sm:text-[26px]">
+                <span class="wm-top text-[#0A2540]">R ALAM</span>
+                <span class="wm-bottom text-[#475569]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-[#0A2540] dark:text-white">Monochrome Navy</h3>
+              <p class="text-xs text-[#475569] dark:text-neutral-400 mt-0.5">Official seals, stamps &amp; embossing</p>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#F8FAFC] dark:bg-[#141416] text-[#0A2540] dark:text-neutral-300 border border-[#E5E5E7] dark:border-[#262629]">1-Color</span>
+          </div>
+        </div>
+
+        <!-- 6. Reversed White Stencil -->
+        <div class="rounded-3xl border border-[#E5E5E7] dark:border-[#262629] overflow-hidden bg-white dark:bg-[#0C0C0E] flex flex-col">
+          <div class="h-48 sm:h-52 bg-[#EA580C] flex items-center justify-center p-6 border-b border-[#E5E5E7] dark:border-[#262629]">
+            <div class="flex items-center gap-4">
+              <svg class="brand-mark logo-mono-white w-14 h-14 sm:w-16 sm:h-16 shrink-0"><use class="logo-use" href="#logo-v1"></use></svg>
+              <div class="brand-wordmark text-[24px] sm:text-[26px]">
+                <span class="wm-top text-white">R ALAM</span>
+                <span class="wm-bottom text-white/90"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-[#0A2540] dark:text-white">Reversed White</h3>
+              <p class="text-xs text-[#475569] dark:text-neutral-400 mt-0.5">Vessel hulls, uniforms &amp; decals</p>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#EA580C] text-white">Stencil</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Clear Space & Minimum Size Stage -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+        <div class="lg:col-span-8 rounded-3xl bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629] overflow-hidden flex flex-col">
+          <div class="px-5 py-3.5 border-b border-[#E5E5E7] dark:border-[#262629] flex items-center justify-between gap-3">
+            <span class="text-xs font-bold text-[#0A2540] dark:text-white">Clear Space Construction Grid</span>
+            <button
+              id="toggleGridBtn"
+              type="button"
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white dark:bg-[#141416] border border-[#E5E5E7] dark:border-[#262629] text-[11px] font-bold text-[#0A2540] dark:text-white hover:border-[#EA580C] transition-colors cursor-pointer"
+            >
+              <span id="gridToggleDot" class="w-2 h-2 rounded-full bg-[#EA580C]"></span>
+              <span id="gridToggleText">Hide Grid</span>
+            </button>
+          </div>
+
+          <div id="clearSpaceStage" class="p-8 sm:p-12 flex-1 flex items-center justify-center grid-blueprint">
+            <div id="clearSpaceFrame" class="relative p-8 sm:p-12 border border-dashed border-[#EA580C] rounded-2xl transition-colors">
+              <span class="grid-marker absolute -top-2.5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-[#EA580C] text-white text-[10px] font-bold leading-none">1x</span>
+              <span class="grid-marker absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-[#EA580C] text-white text-[10px] font-bold leading-none">1x</span>
+              <span class="grid-marker absolute top-1/2 -left-3 -translate-y-1/2 px-1.5 py-0.5 rounded bg-[#EA580C] text-white text-[10px] font-bold leading-none">1x</span>
+              <span class="grid-marker absolute top-1/2 -right-3 -translate-y-1/2 px-1.5 py-0.5 rounded bg-[#EA580C] text-white text-[10px] font-bold leading-none">1x</span>
+
+              <div class="p-4 border border-[#0A2540]/15 dark:border-white/15 rounded-xl bg-white/90 dark:bg-black/75 flex flex-col sm:flex-row items-center gap-4 sm:gap-5">
+                <svg class="brand-mark w-16 h-16 sm:w-20 sm:h-20 shrink-0"><use class="logo-use" href="#logo-v1"></use></svg>
+                <div class="brand-wordmark text-[26px] sm:text-[32px]">
+                  <span class="wm-top text-[#0A2540] dark:text-white">R ALAM</span>
+                  <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Minimum Size Specifications -->
+        <div class="lg:col-span-4 rounded-3xl p-6 bg-white dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629] flex flex-col justify-between">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-[#EA580C]">Safe Zone Standard</span>
+            <h3 class="text-lg font-extrabold text-[#0A2540] dark:text-white mt-1">1x Protected Margin</h3>
+            <p class="text-xs sm:text-sm text-[#475569] dark:text-neutral-400 mt-2 leading-relaxed">
+              Maintain a clear space equal to the cap-height of <strong class="text-[#0A2540] dark:text-white">"R"</strong> (<code class="font-mono text-xs text-[#EA580C]">1x</code>) on all four sides so the identity breathes cleanly in every layout.
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-[#E5E5E7] dark:border-[#262629] grid grid-cols-2 gap-3">
+            <div class="p-3.5 rounded-2xl bg-[#F8FAFC] dark:bg-[#141416] border border-[#E5E5E7] dark:border-[#262629]">
+              <p class="text-[10px] font-bold uppercase tracking-wider text-[#475569] dark:text-neutral-500">Print Min</p>
+              <p class="text-xl font-extrabold text-[#0A2540] dark:text-white mt-0.5">25 mm</p>
+              <p class="text-[11px] text-[#475569] dark:text-neutral-400">Full Lockup</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-[#F8FAFC] dark:bg-[#141416] border border-[#E5E5E7] dark:border-[#262629]">
+              <p class="text-[10px] font-bold uppercase tracking-wider text-[#475569] dark:text-neutral-500">Digital Min</p>
+              <p class="text-xl font-extrabold text-[#0A2540] dark:text-white mt-0.5">120 px</p>
+              <p class="text-[11px] text-[#475569] dark:text-neutral-400">Icon Only: 32px</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 03: BRAND COLOR ARCHITECTURE (EXACT 60-30-10 SPECS)
+         ====================================================================== -->
+    <section id="colors" class="py-14 sm:py-20 border-b border-[#E5E5E7] dark:border-[#262629]">
+      <div class="mb-8 sm:mb-10">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#EA580C] mb-2">03 / Brand Color Architecture</p>
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-[-0.025em] text-[#0A2540] dark:text-white">
+          Brand Color Proportion Rule
+        </h2>
+        <p class="mt-2.5 text-sm sm:text-base text-[#475569] dark:text-neutral-400 max-w-2xl">
+          60% Ice / White Canvas • 30% Maritime Navy • 10% Signal Orange. Tap any card to copy its HEX code.
+        </p>
+      </div>
+
+      <!-- 60-30-10 Proportional Bar -->
+      <div class="mb-6 rounded-3xl p-5 bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629]">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-xs">
+          <span class="font-bold uppercase tracking-wider text-[#0A2540] dark:text-white">Brand Color Proportion Rule</span>
+          <span class="text-[#475569] dark:text-neutral-400">60% Ice / White Canvas • 30% Maritime Navy • 10% Signal Orange</span>
+        </div>
+        <div class="h-11 w-full rounded-2xl overflow-hidden flex border border-[#E5E5E7] dark:border-[#262629] text-xs font-bold">
+          <div class="w-[60%] bg-[#F8FAFC] text-[#0A2540] flex items-center justify-center border-r border-[#E5E5E7]">60% Surface</div>
+          <div class="w-[30%] bg-[#0A2540] text-white flex items-center justify-center">30% Primary</div>
+          <div class="w-[10%] bg-[#EA580C] text-white flex items-center justify-center">10%</div>
+        </div>
+      </div>
+
+      <!-- 4 Exact Click-to-Copy Swatch Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <!-- 1. Maritime Navy -->
+        <button
+          type="button"
+          onclick="copyHex('#0A2540', 'Maritime Navy')"
+          class="group text-left rounded-3xl border border-[#E5E5E7] dark:border-[#262629] bg-white dark:bg-[#0C0C0E] overflow-hidden hover:border-[#0A2540] dark:hover:border-white transition-colors cursor-pointer flex flex-col"
+        >
+          <div class="h-28 w-full bg-[#0A2540] p-4 flex flex-col justify-between">
+            <span class="self-end text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/15 text-white">Copy HEX</span>
+            <span class="font-mono text-base font-extrabold text-white">#0A2540</span>
+          </div>
+          <div class="p-4 space-y-2.5 flex-1">
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#EA580C]">Primary · 30%</div>
+              <div class="text-sm font-extrabold text-[#0A2540] dark:text-white mt-0.5">Maritime Navy</div>
+            </div>
+            <div class="pt-2.5 border-t border-[#E5E5E7] dark:border-[#262629] text-[11px] font-mono text-[#475569] dark:text-neutral-400 space-y-1">
+              <div class="flex justify-between"><span>RGB</span><span class="font-bold text-[#0A2540] dark:text-neutral-200">10, 37, 64</span></div>
+              <div class="flex justify-between"><span>CMYK</span><span class="font-bold text-[#0A2540] dark:text-neutral-200">84, 42, 0, 75</span></div>
+            </div>
+          </div>
+        </button>
+
+        <!-- 2. Signal Orange -->
+        <button
+          type="button"
+          onclick="copyHex('#EA580C', 'Signal Orange')"
+          class="group text-left rounded-3xl border border-[#E5E5E7] dark:border-[#262629] bg-white dark:bg-[#0C0C0E] overflow-hidden hover:border-[#EA580C] transition-colors cursor-pointer flex flex-col"
+        >
+          <div class="h-28 w-full bg-[#EA580C] p-4 flex flex-col justify-between">
+            <span class="self-end text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/20 text-white">Copy HEX</span>
+            <span class="font-mono text-base font-extrabold text-white">#EA580C</span>
+          </div>
+          <div class="p-4 space-y-2.5 flex-1">
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#EA580C]">Brand Accent · 10%</div>
+              <div class="text-sm font-extrabold text-[#0A2540] dark:text-white mt-0.5">Signal Orange</div>
+            </div>
+            <div class="pt-2.5 border-t border-[#E5E5E7] dark:border-[#262629] text-[11px] font-mono text-[#475569] dark:text-neutral-400 space-y-1">
+              <div class="flex justify-between"><span>RGB</span><span class="font-bold text-[#0A2540] dark:text-neutral-200">234, 88, 12</span></div>
+              <div class="flex justify-between"><span>CMYK</span><span class="font-bold text-[#0A2540] dark:text-neutral-200">0, 62, 95, 8</span></div>
+            </div>
+          </div>
+        </button>
+
+        <!-- 3. Steel Hull Gray -->
+        <button
+          type="button"
+          onclick="copyHex('#475569', 'Steel Hull Gray')"
+          class="group text-left rounded-3xl border border-[#E5E5E7] dark:border-[#262629] bg-white dark:bg-[#0C0C0E] overflow-hidden hover:border-[#475569] transition-colors cursor-pointer flex flex-col"
+        >
+          <div class="h-28 w-full bg-[#475569] p-4 flex flex-col justify-between">
+            <span class="self-end text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/20 text-white">Copy HEX</span>
+            <span class="font-mono text-base font-extrabold text-white">#475569</span>
+          </div>
+          <div class="p-4 space-y-2.5 flex-1">
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#EA580C]">Structural Neutral</div>
+              <div class="text-sm font-extrabold text-[#0A2540] dark:text-white mt-0.5">Steel Hull Gray</div>
+            </div>
+            <div class="pt-2.5 border-t border-[#E5E5E7] dark:border-[#262629] text-[11px] font-mono text-[#475569] dark:text-neutral-400 space-y-1">
+              <div class="flex justify-between"><span>RGB</span><span class="font-bold text-[#0A2540] dark:text-neutral-200">71, 85, 105</span></div>
+              <div class="flex justify-between"><span>CMYK</span><span class="font-bold text-[#0A2540] dark:text-neutral-200">32, 19, 0, 59</span></div>
+            </div>
+          </div>
+        </button>
+
+        <!-- 4. Ice Architectural -->
+        <button
+          type="button"
+          onclick="copyHex('#F8FAFC', 'Ice Architectural')"
+          class="group text-left rounded-3xl border border-[#E5E5E7] dark:border-[#262629] bg-white dark:bg-[#0C0C0E] overflow-hidden hover:border-[#0A2540] dark:hover:border-white transition-colors cursor-pointer flex flex-col"
+        >
+          <div class="h-28 w-full bg-[#F8FAFC] p-4 flex flex-col justify-between border-b border-[#E5E5E7]">
+            <span class="self-end text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#0A2540]/10 text-[#0A2540]">Copy HEX</span>
+            <span class="font-mono text-base font-extrabold text-[#0A2540]">#F8FAFC</span>
+          </div>
+          <div class="p-4 space-y-2.5 flex-1">
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#EA580C]">Clean Canvas · 60%</div>
+              <div class="text-sm font-extrabold text-[#0A2540] dark:text-white mt-0.5">Ice Architectural</div>
+            </div>
+            <div class="pt-2.5 border-t border-[#E5E5E7] dark:border-[#262629] text-[11px] font-mono text-[#475569] dark:text-neutral-400 space-y-1">
+              <div class="flex justify-between"><span>RGB</span><span class="font-bold text-[#0A2540] dark:text-neutral-200">248, 250, 252</span></div>
+              <div class="flex justify-between"><span>CMYK</span><span class="font-bold text-[#0A2540] dark:text-neutral-200">2, 1, 0, 1</span></div>
+            </div>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 04: TYPOGRAPHY SYSTEM (PLUS JAKARTA SANS)
+         ====================================================================== -->
+    <section id="typography" class="py-14 sm:py-20 border-b border-[#E5E5E7] dark:border-[#262629]">
+      <div class="mb-8 sm:mb-12">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#EA580C] mb-2">04 / Typography System</p>
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-[-0.025em] text-[#0A2540] dark:text-white">
+          Plus Jakarta Sans
+        </h2>
+        <p class="mt-2.5 text-sm sm:text-base text-[#475569] dark:text-neutral-400 max-w-2xl">
+          Engineered geometric clarity for executive wordmarks, architectural signage, and crisp digital legibility.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Specimen Card -->
+        <div class="lg:col-span-5 rounded-3xl p-6 sm:p-8 bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629] flex flex-col justify-between">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-[#EA580C]">Primary Brand Typeface</span>
+            <div class="text-7xl sm:text-8xl font-extrabold tracking-[-0.04em] text-[#0A2540] dark:text-white mt-3 leading-none">
+              Aa
+            </div>
+            <p class="mt-6 text-xs sm:text-sm font-semibold tracking-wider text-[#475569] dark:text-neutral-400 break-words leading-relaxed">
+              ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+              abcdefghijklmnopqrstuvwxyz<br />
+              0123456789 &amp; • — # / %
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-[#E5E5E7] dark:border-[#262629] flex items-center justify-between text-xs font-bold text-[#0A2540] dark:text-neutral-300">
+            <span>Google Fonts</span>
+            <span class="text-[#EA580C]">Weights 400–800</span>
+          </div>
+        </div>
+
+        <!-- Weight Hierarchy & Live Tester -->
+        <div class="lg:col-span-7 flex flex-col gap-5">
+          <div class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629] space-y-3.5">
+            <div class="flex items-baseline justify-between gap-4 pb-3 border-b border-[#E5E5E7] dark:border-[#262629]">
+              <span class="text-xl sm:text-2xl font-extrabold tracking-[0.04em] text-[#0A2540] dark:text-white">R ALAM ENTERPRISE</span>
+              <span class="text-[11px] font-mono text-[#475569] dark:text-neutral-500 shrink-0">ExtraBold 800</span>
+            </div>
+            <div class="flex items-baseline justify-between gap-4 pb-3 border-b border-[#E5E5E7] dark:border-[#262629]">
+              <span class="text-base sm:text-lg font-bold tracking-[-0.01em] text-[#0A2540] dark:text-white">Civil Infrastructure &amp; Marine Logistics</span>
+              <span class="text-[11px] font-mono text-[#475569] dark:text-neutral-500 shrink-0">Bold 700</span>
+            </div>
+            <div class="flex items-baseline justify-between gap-4 pb-3 border-b border-[#E5E5E7] dark:border-[#262629]">
+              <span class="text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase text-[#EA580C]">1st Class Enlisted Contractor</span>
+              <span class="text-[11px] font-mono text-[#475569] dark:text-neutral-500 shrink-0">SemiBold 600</span>
+            </div>
+            <div class="flex items-baseline justify-between gap-4 pb-3 border-b border-[#E5E5E7] dark:border-[#262629]">
+              <span class="text-xs sm:text-sm font-medium text-[#0A2540] dark:text-neutral-200">Precision execution across land &amp; waterways.</span>
+              <span class="text-[11px] font-mono text-[#475569] dark:text-neutral-500 shrink-0">Medium 500</span>
+            </div>
+            <div class="flex items-baseline justify-between gap-4">
+              <span class="text-xs sm:text-sm font-normal text-[#475569] dark:text-neutral-400">Delivering roads, commercial structures, and river cargo solutions.</span>
+              <span class="text-[11px] font-mono text-[#475569] dark:text-neutral-500 shrink-0">Regular 400</span>
+            </div>
+          </div>
+
+          <!-- Interactive Text Tester -->
+          <div class="rounded-3xl p-5 sm:p-6 bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629]">
+            <div class="flex items-center justify-between mb-2.5">
+              <label for="typeTesterInput" class="text-[11px] font-bold uppercase tracking-[0.14em] text-[#475569] dark:text-neutral-400">Live Type Tester</label>
+              <span class="text-[11px] font-semibold text-[#EA580C]">Interactive</span>
+            </div>
+            <input
+              id="typeTesterInput"
+              type="text"
+              value="R ALAM ENTERPRISE — Building Land & Waterways"
+              class="w-full px-4 py-3 rounded-2xl bg-white dark:bg-[#141416] border border-[#E5E5E7] dark:border-[#262629] text-base sm:text-lg font-extrabold tracking-tight text-[#0A2540] dark:text-white focus:outline-none focus:border-[#EA580C] transition-colors"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 05: BRAND APPLICATIONS (FLAT MINIMALIST MOCKUPS)
+         ====================================================================== -->
+    <section id="applications" class="py-14 sm:py-20">
+      <div class="mb-8 sm:mb-12">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#EA580C] mb-2">05 / Brand Applications</p>
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-[-0.025em] text-[#0A2540] dark:text-white">
+          Identity in Action
+        </h2>
+        <p class="mt-2.5 text-sm sm:text-base text-[#475569] dark:text-neutral-400 max-w-2xl">
+          Every application updates instantly when switching between V1 and V2, preserving flush-aligned wordmarks and adaptive contrast.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Application 1: Executive Business Cards -->
+        <div class="lg:col-span-7 rounded-3xl p-5 sm:p-7 bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629] flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-[#EA580C]">Stationery 01</span>
+              <h3 class="text-base sm:text-lg font-extrabold text-[#0A2540] dark:text-white">Executive Business Cards</h3>
+            </div>
+            <span class="text-[11px] font-mono text-[#475569] dark:text-neutral-500">3.5 × 2.0 in</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Front Card (Dark Navy + Dark Adapted Logo) -->
+            <div class="aspect-[1.75/1] rounded-2xl bg-[#0A2540] p-5 flex flex-col items-center justify-center relative overflow-hidden border border-white/10">
+              <div class="absolute bottom-0 inset-x-0 h-1.5 bg-[#EA580C]"></div>
+              <svg class="brand-mark logo-dark w-16 h-16 mb-2.5"><use class="logo-use" href="#logo-v1"></use></svg>
+              <div class="brand-wordmark text-[18px]">
+                <span class="wm-top text-[#F8FAFC]">R ALAM</span>
+                <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+              </div>
+            </div>
+
+            <!-- Back Card (Crisp White + Original Light Logo) -->
+            <div class="aspect-[1.75/1] rounded-2xl bg-white p-5 flex flex-col justify-between relative overflow-hidden border border-[#E5E5E7]">
+              <div class="absolute top-0 inset-x-0 h-1.5 bg-[#EA580C]"></div>
+              <div class="flex items-center justify-between gap-2 pt-1">
+                <div class="flex items-center gap-2.5">
+                  <svg class="brand-mark logo-light w-10 h-10 shrink-0"><use class="logo-use" href="#logo-v1"></use></svg>
+                  <div class="brand-wordmark text-[13px]">
+                    <span class="wm-top text-[#0A2540]">R ALAM</span>
+                    <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+                  </div>
+                </div>
+                <div class="text-right shrink-0">
+                  <div class="text-[11px] font-extrabold text-[#0A2540]">Proprietor</div>
+                  <div class="text-[9px] font-semibold text-[#475569]">Executive Office</div>
+                </div>
+              </div>
+              <div class="pt-2.5 border-t border-[#E5E5E7] text-[9px] text-[#475569] space-y-0.5">
+                <div class="font-bold text-[#0A2540]">+880 1793-957306 • info@ralamenterprise.com</div>
+                <div>Comilla &amp; Narayanganj Marine Hub</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application 2: Official Corporate Letterhead -->
+        <div class="lg:col-span-5 rounded-3xl p-5 sm:p-7 bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629] flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-[#EA580C]">Stationery 02</span>
+              <h3 class="text-base sm:text-lg font-extrabold text-[#0A2540] dark:text-white">Corporate Letterhead</h3>
+            </div>
+            <span class="text-[11px] font-mono text-[#475569] dark:text-neutral-500">A4 Clean</span>
+          </div>
+
+          <div class="rounded-2xl bg-white border border-[#E5E5E7] p-5 relative overflow-hidden flex flex-col justify-between min-h-[230px]">
+            <svg class="brand-mark logo-mono-navy w-32 h-32 opacity-[0.04] absolute right-4 bottom-8 pointer-events-none">
+              <use class="logo-use" href="#logo-v1"></use>
+            </svg>
+            <div>
+              <div class="flex items-center justify-between gap-2 pb-3 border-b-2 border-[#0A2540]">
+                <div class="flex items-center gap-2.5">
+                  <svg class="brand-mark logo-light w-10 h-10 shrink-0"><use class="logo-use" href="#logo-v1"></use></svg>
+                  <div class="brand-wordmark text-[15px]">
+                    <span class="wm-top text-[#0A2540]">R ALAM</span>
+                    <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+                  </div>
+                </div>
+                <div class="text-right text-[8px] text-[#475569] font-medium shrink-0">
+                  <div>Ref: RAE/2026/104</div>
+                  <div>Official Letterhead</div>
+                </div>
+              </div>
+              <div class="mt-4 space-y-2">
+                <div class="h-2 w-28 rounded bg-[#0A2540]/80"></div>
+                <div class="h-1.5 w-full rounded bg-[#E5E5E7]"></div>
+                <div class="h-1.5 w-11/12 rounded bg-[#E5E5E7]"></div>
+                <div class="h-1.5 w-4/5 rounded bg-[#E5E5E7]"></div>
+              </div>
+            </div>
+            <div class="mt-6 pt-2.5 border-t border-[#E5E5E7] flex items-center justify-between text-[8px] font-semibold text-[#475569]">
+              <span>www.ralamenterprise.com</span>
+              <span class="text-[#EA580C]">Construction • Roadwork • Marine</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application 3: Site Signboard & Hard Hat Badge -->
+        <div class="lg:col-span-6 rounded-3xl p-5 sm:p-7 bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629]">
+          <div class="mb-5">
+            <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-[#EA580C]">On-Site Identity</span>
+            <h3 class="text-base sm:text-lg font-extrabold text-[#0A2540] dark:text-white">Site Signboard &amp; Safety PPE</h3>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+            <div class="sm:col-span-8 rounded-2xl bg-[#0A2540] text-white overflow-hidden border border-white/10">
+              <div class="bg-[#EA580C] px-4 py-1.5 text-[9px] font-extrabold uppercase tracking-[0.18em] flex justify-between">
+                <span>Active Project Site</span>
+                <span>Safety First</span>
+              </div>
+              <div class="p-4 sm:p-5 flex items-center gap-3.5">
+                <svg class="brand-mark logo-dark w-14 h-14 shrink-0"><use class="logo-use" href="#logo-v1"></use></svg>
+                <div class="min-w-0">
+                  <div class="brand-wordmark text-[17px]">
+                    <span class="wm-top text-[#F8FAFC]">R ALAM</span>
+                    <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+                  </div>
+                  <div class="text-[10px] text-slate-300 mt-1.5">1st Class Contractor • Marine</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sm:col-span-4 rounded-2xl bg-white border border-[#E5E5E7] p-4 flex flex-col items-center justify-center text-center">
+              <div class="relative w-24 h-20 flex items-center justify-center">
+                <svg viewBox="0 0 260 210" class="w-full h-full">
+                  <path d="M 38 148 C 38 72, 76 34, 130 34 C 184 34, 222 72, 222 148 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="4" />
+                  <path d="M 41 134 Q 130 124 219 134 L 221 144 Q 130 134 39 144 Z" fill="#EA580C" />
+                  <path d="M 24 148 Q 130 138 236 148 C 242 152, 238 164, 224 164 Q 130 156 36 164 C 22 164, 18 152, 24 148 Z" fill="#0A2540" />
+                </svg>
+                <svg class="brand-mark logo-light w-9 h-9 absolute top-4"><use class="logo-use" href="#logo-v1"></use></svg>
+              </div>
+              <span class="text-[10px] font-bold text-[#0A2540] mt-1">Hard Hat Badge</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application 4: Digital App Icon & Social Avatars -->
+        <div class="lg:col-span-6 rounded-3xl p-5 sm:p-7 bg-[#F8FAFC] dark:bg-[#0C0C0E] border border-[#E5E5E7] dark:border-[#262629] flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-[0.16em] text-[#EA580C]">Digital Presence</span>
+              <h3 class="text-base sm:text-lg font-extrabold text-[#0A2540] dark:text-white">App Icons &amp; Social Avatars</h3>
+            </div>
+            <span class="text-[11px] font-mono text-[#475569] dark:text-neutral-500">Light &amp; Dark</span>
+          </div>
+
+          <div class="grid grid-cols-4 gap-2.5 sm:gap-3 items-center justify-items-center py-2">
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-white border border-[#E5E5E7] p-2 sm:p-2.5 flex items-center justify-center">
+                <svg class="brand-mark logo-light w-full h-full"><use class="logo-use" href="#logo-v1"></use></svg>
+              </div>
+              <span class="text-[10px] font-semibold text-[#475569] dark:text-neutral-400">App Light</span>
+            </div>
+
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-[#0A2540] border border-white/10 p-2 sm:p-2.5 flex items-center justify-center">
+                <svg class="brand-mark logo-dark w-full h-full"><use class="logo-use" href="#logo-v1"></use></svg>
+              </div>
+              <span class="text-[10px] font-semibold text-[#475569] dark:text-neutral-400">App Dark</span>
+            </div>
+
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white border border-[#E5E5E7] p-2.5 sm:p-3 flex items-center justify-center">
+                <svg class="brand-mark logo-light w-full h-full"><use class="logo-use" href="#logo-v1"></use></svg>
+              </div>
+              <span class="text-[10px] font-semibold text-[#475569] dark:text-neutral-400">Avatar Light</span>
+            </div>
+
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-black border border-[#EA580C]/70 p-2.5 sm:p-3 flex items-center justify-center">
+                <svg class="brand-mark logo-dark w-full h-full"><use class="logo-use" href="#logo-v1"></use></svg>
+              </div>
+              <span class="text-[10px] font-semibold text-[#475569] dark:text-neutral-400">Avatar Dark</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MINIMAL FOOTER (NO PRINT/PDF BUTTON)
+       ======================================================================== -->
+  <footer class="border-t border-[#E5E5E7] dark:border-[#262629] bg-[#F8FAFC] dark:bg-[#0C0C0E] transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <svg class="brand-mark w-9 h-9 shrink-0" aria-label="R Alam Enterprise Emblem">
+          <use class="logo-use" href="#logo-v1"></use>
+        </svg>
+        <div>
+          <div class="brand-wordmark text-[15px]">
+            <span class="wm-top text-[#0A2540] dark:text-white">R ALAM</span>
+            <span class="wm-bottom text-[#EA580C]"><span>E</span><span>N</span><span>T</span><span>E</span><span>R</span><span>P</span><span>R</span><span>I</span><span>S</span><span>E</span></span>
+          </div>
+          <div class="text-[11px] text-[#475569] dark:text-neutral-400 mt-1">
+            Brand Identity Showcase • <span id="footerVersionStatus" class="font-bold text-[#0A2540] dark:text-white">Viewing V1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick V1 / V2 Footer Switcher -->
+      <div class="inline-flex items-center p-1 rounded-xl bg-white dark:bg-[#141416] border border-[#E5E5E7] dark:border-[#262629]">
+        <button type="button" data-version="v1" class="version-btn px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition-colors cursor-pointer">
+          V1
+        </button>
+        <button type="button" data-version="v2" class="version-btn px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition-colors cursor-pointer">
+          V2
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       TOAST FEEDBACK NOTIFICATION
+       ======================================================================== -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-200"
+  >
+    <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#0A2540] dark:bg-white text-white dark:text-black text-xs font-bold border border-black/10 dark:border-white/10 whitespace-nowrap">
+      <span id="toastDot" class="w-2.5 h-2.5 rounded-full bg-[#EA580C]"></span>
+      <span id="toastText">Updated</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       INTERACTIVE CONTROLLER SCRIPT
+       ======================================================================== -->
+  <script>
+    (function () {
+      const state = {
+        version: 'v1',      // 'v1' | 'v2'
+        heroMode: 'full',   // 'full' | 'symbol'
+        heroSurface: 'white',
+        conceptLayer: 'all',
+        gridVisible: true,
+      };
+
+      let toastTimer = null;
+
+      /* ----------------------------------------------------------------------
+         1. Toast Helper
+         ---------------------------------------------------------------------- */
+      function showToast(msg, dotColor) {
+        const toast = document.getElementById('toast');
+        const text = document.getElementById('toastText');
+        const dot = document.getElementById('toastDot');
+        if (!toast || !text || !dot) return;
+
+        text.textContent = msg;
+        dot.style.backgroundColor = dotColor || '#EA580C';
+        toast.classList.remove('opacity-0', 'translate-y-3');
+        toast.classList.add('opacity-100', 'translate-y-0');
+
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-3');
+          toast.classList.remove('opacity-100', 'translate-y-0');
+        }, 2000);
+      }
+
+      /* ----------------------------------------------------------------------
+         2. Clipboard Copy Helper (Safe for iFrames)
+         ---------------------------------------------------------------------- */
+      window.copyHex = function (hex, name) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = hex;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast('Copied ' + name + ' (' + hex + ')', hex);
+        } catch (err) {
+          showToast(name + ': ' + hex, hex);
+        }
+      };
+
+      /* ----------------------------------------------------------------------
+         3. Global V1 / V2 Logo Switcher (Zero Trace of Previous Version)
+         ---------------------------------------------------------------------- */
+      function setVersion(ver, notify) {
+        state.version = ver;
+        const targetHref = ver === 'v1' ? '#logo-v1' : '#logo-v2';
+
+        // Update every SVG <use> element on the page
+        document.querySelectorAll('.logo-use').forEach((useEl) => {
+          useEl.setAttribute('href', targetHref);
+        });
+
+        // Update active state on all V1 / V2 buttons (Header + Footer)
+        document.querySelectorAll('.version-btn').forEach((btn) => {
+          const active = btn.dataset.version === ver;
+          btn.classList.toggle('bg-[#0A2540]', active);
+          btn.classList.toggle('dark:bg-white', active);
+          btn.classList.toggle('text-white', active);
+          btn.classList.toggle('dark:text-black', active);
+
+          btn.classList.toggle('text-[#475569]', !active);
+          btn.classList.toggle('dark:text-neutral-400', !active);
+        });
+
+        const label = ver === 'v1' ? 'V1' : 'V2';
+        const heroVerLabel = document.getElementById('heroVersionLabel');
+        const footerVerStatus = document.getElementById('footerVersionStatus');
+        if (heroVerLabel) heroVerLabel.textContent = label;
+        if (footerVerStatus) footerVerStatus.textContent = 'Viewing ' + label;
+
+        if (notify) {
+          showToast('Switched to Logo ' + label);
+        }
+      }
+
+      document.querySelectorAll('.version-btn').forEach((btn) => {
+        btn.addEventListener('click', () => setVersion(btn.dataset.version, true));
+      });
+
+      /* ----------------------------------------------------------------------
+         4. Light / Dark Mode Toggle
+         ---------------------------------------------------------------------- */
+      const themeBtn = document.getElementById('themeToggleBtn');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.toggle('dark');
+          try {
+            localStorage.setItem('ralam-theme', isDark ? 'dark' : 'light');
+          } catch (e) {}
+          showToast(isDark ? 'Dark Mode Enabled' : 'Light Mode Enabled');
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         5. Hero Mode Toggle (Full Lockup | Symbol Only) & Surface Switcher
+         ---------------------------------------------------------------------- */
+      window.setHeroMode = function (mode) {
+        state.heroMode = mode;
+        const isSymbol = mode === 'symbol';
+        const wmWrap = document.getElementById('heroWordmarkWrap');
+        const logoSvg = document.getElementById('heroLogoSvg');
+        const modeLabel = document.getElementById('heroModeLabel');
+        const fullBtn = document.getElementById('modeFullBtn');
+        const symBtn = document.getElementById('modeSymbolBtn');
+
+        wmWrap.classList.toggle('hidden', isSymbol);
+        modeLabel.textContent = isSymbol ? 'Symbol Only' : 'Full Lockup';
+
+        // Enlarge symbol cleanly when inspecting Symbol Only
+        logoSvg.classList.toggle('w-44', isSymbol);
+        logoSvg.classList.toggle('h-44', isSymbol);
+        logoSvg.classList.toggle('sm:w-56', isSymbol);
+        logoSvg.classList.toggle('sm:h-56', isSymbol);
+        logoSvg.classList.toggle('lg:w-64', isSymbol);
+        logoSvg.classList.toggle('lg:h-64', isSymbol);
+
+        logoSvg.classList.toggle('w-32', !isSymbol);
+        logoSvg.classList.toggle('h-32', !isSymbol);
+        logoSvg.classList.toggle('sm:w-40', !isSymbol);
+        logoSvg.classList.toggle('sm:h-40', !isSymbol);
+        logoSvg.classList.toggle('lg:w-44', !isSymbol);
+        logoSvg.classList.toggle('lg:h-44', !isSymbol);
+
+        // Button active styling
+        fullBtn.className = !isSymbol
+          ? 'px-3.5 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer bg-[#0A2540] dark:bg-white text-white dark:text-black'
+          : 'px-3.5 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer text-[#475569] dark:text-neutral-400';
+
+        symBtn.className = isSymbol
+          ? 'px-3.5 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer bg-[#0A2540] dark:bg-white text-white dark:text-black'
+          : 'px-3.5 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer text-[#475569] dark:text-neutral-400';
+      };
+
+      const surfaces = {
+        white: {
+          bg: '#FFFFFF',
+          label: 'Pure White (#FFFFFF)',
+          labelColor: '#475569',
+          headerBorder: 'rgba(0,0,0,0.06)',
+          logoClass: 'logo-light',
+          wmTop: '#0A2540',
+          wmBottom: '#EA580C',
+          divider: 'rgba(10,37,64,0.15)',
+          tagline: '#475569',
+        },
+        ice: {
+          bg: '#F8FAFC',
+          label: 'Ice Gray (#F8FAFC)',
+          labelColor: '#475569',
+          headerBorder: 'rgba(0,0,0,0.06)',
+          logoClass: 'logo-light',
+          wmTop: '#0A2540',
+          wmBottom: '#EA580C',
+          divider: 'rgba(10,37,64,0.15)',
+          tagline: '#475569',
+        },
+        navy: {
+          bg: '#0A2540',
+          label: 'Maritime Navy (#0A2540) • Dark Adapted',
+          labelColor: '#94A3B8',
+          headerBorder: 'rgba(255,255,255,0.10)',
+          logoClass: 'logo-dark',
+          wmTop: '#F8FAFC',
+          wmBottom: '#EA580C',
+          divider: 'rgba(248,250,252,0.18)',
+          tagline: '#CBD5E1',
+        },
+        black: {
+          bg: '#000000',
+          label: 'Pure Black (#000000) • Dark Adapted',
+          labelColor: '#94A3B8',
+          headerBorder: 'rgba(255,255,255,0.12)',
+          logoClass: 'logo-dark',
+          wmTop: '#F8FAFC',
+          wmBottom: '#EA580C',
+          divider: 'rgba(248,250,252,0.18)',
+          tagline: '#94A3B8',
+        },
+        orange: {
+          bg: '#EA580C',
+          label: 'Signal Orange (#EA580C) • Reversed White',
+          labelColor: 'rgba(255,255,255,0.88)',
+          headerBorder: 'rgba(255,255,255,0.18)',
+          logoClass: 'logo-mono-white',
+          wmTop: '#FFFFFF',
+          wmBottom: 'rgba(255,255,255,0.92)',
+          divider: 'rgba(255,255,255,0.28)',
+          tagline: 'rgba(255,255,255,0.90)',
+        },
+      };
+
+      function applyHeroSurface(key) {
+        state.heroSurface = key;
+        const cfg = surfaces[key] || surfaces.white;
+
+        document.getElementById('heroStage').style.backgroundColor = cfg.bg;
+        document.getElementById('heroStageHeader').style.borderColor = cfg.headerBorder;
+        const sLabel = document.getElementById('heroSurfaceLabel');
+        const mLabel = document.getElementById('heroModeLabel');
+        sLabel.textContent = cfg.label;
+        sLabel.style.color = cfg.labelColor;
+        mLabel.style.color = cfg.labelColor;
+
+        const svg = document.getElementById('heroLogoSvg');
+        svg.classList.remove('logo-light', 'logo-dark', 'logo-mono-navy', 'logo-mono-white');
+        svg.classList.add(cfg.logoClass);
+
+        document.getElementById('heroWmTop').style.color = cfg.wmTop;
+        document.getElementById('heroWmBottom').style.color = cfg.wmBottom;
+        document.getElementById('heroDivider').style.backgroundColor = cfg.divider;
+        document.getElementById('heroTagline').style.color = cfg.tagline;
+
+        document.querySelectorAll('.surface-btn').forEach((btn) => {
+          const active = btn.dataset.surface === key;
+          btn.classList.toggle('border-[#EA580C]', active);
+          btn.classList.toggle('ring-1', active);
+          btn.classList.toggle('ring-[#EA580C]', active);
+          btn.classList.toggle('border-[#E5E5E7]', !active);
+          btn.classList.toggle('dark:border-[#262629]', !active);
+        });
+      }
+
+      document.querySelectorAll('.surface-btn').forEach((btn) => {
+        btn.addEventListener('click', () => applyHeroSurface(btn.dataset.surface));
+      });
+
+      /* ----------------------------------------------------------------------
+         6. Concept Anatomy Layer Switcher (Mobile Pills + Desktop Cards)
+         ---------------------------------------------------------------------- */
+      const conceptInfo = {
+        all: {
+          badge: 'Unified Mark',
+          title: 'Complete Integrated Emblem',
+          desc: 'Three core infrastructure divisions balanced in one forward-moving geometric silhouette.',
+          caption: 'Unified Mark — All 3 operational pillars active',
+        },
+        construction: {
+          badge: '01 • Construction',
+          title: 'Stepped Architectural Towers',
+          desc: 'Rising vertical silhouettes representing structural permanence, civil contracting, and upward growth.',
+          caption: 'Layer 01 Isolated — Stepped Architectural Towers (Construction)',
+        },
+        marine: {
+          badge: '02 • Marine Logistics',
+          title: 'Cargo & Bulkhead Vessel',
+          desc: 'Signal Orange hull and modular cargo deck reflecting maritime tonnage and reliable river transport.',
+          caption: 'Layer 02 Isolated — Cargo & Bulkhead Vessel (Marine Logistics)',
+        },
+        roadwork: {
+          badge: '03 • Roadwork',
+          title: 'Sweeping Highway Arc',
+          desc: 'Dynamic curved base symbolizing road infrastructure, forward momentum, and national connectivity.',
+          caption: 'Layer 03 Isolated — Sweeping Highway Arc (Roadwork)',
+        },
+      };
+
+      function setConceptLayer(layer) {
+        state.conceptLayer = layer;
+        const info = conceptInfo[layer] || conceptInfo.all;
+
+        const svg = document.getElementById('anatomySvg');
+        if (svg) svg.setAttribute('data-focus', layer);
+
+        const cap = document.getElementById('anatomyDesktopCaption');
+        if (cap) cap.textContent = info.caption;
+
+        // Mobile card updates
+        document.getElementById('mobileConceptBadge').textContent = info.badge;
+        document.getElementById('mobileConceptTitle').textContent = info.title;
+        document.getElementById('mobileConceptDesc').textContent = info.desc;
+
+        // Style Mobile Pills
+        document.querySelectorAll('.concept-mobile-pill').forEach((pill) => {
+          const active = pill.dataset.layer === layer;
+          pill.className = active
+            ? 'concept-mobile-pill py-2.5 px-1 rounded-xl text-[11px] font-bold text-center transition-colors cursor-pointer bg-[#0A2540] dark:bg-white text-white dark:text-black'
+            : 'concept-mobile-pill py-2.5 px-1 rounded-xl text-[11px] font-bold text-center transition-colors cursor-pointer text-[#475569] dark:text-neutral-400';
+        });
+
+        // Style Desktop Cards
+        document.querySelectorAll('.concept-desktop-btn').forEach((card) => {
+          const active = card.dataset.layer === layer;
+          card.className = active
+            ? 'concept-desktop-btn text-left rounded-2xl p-5 border transition-colors cursor-pointer bg-[#F8FAFC] dark:bg-[#141416] border-[#EA580C]'
+            : 'concept-desktop-btn text-left rounded-2xl p-5 border transition-colors cursor-pointer bg-white dark:bg-[#0C0C0E] border-[#E5E5E7] dark:border-[#262629] hover:border-[#0A2540] dark:hover:border-neutral-500';
+        });
+      }
+
+      document.querySelectorAll('.concept-mobile-pill, .concept-desktop-btn').forEach((el) => {
+        el.addEventListener('click', () => setConceptLayer(el.dataset.layer));
+      });
+
+      /* ----------------------------------------------------------------------
+         7. Clear Space Construction Grid Toggle
+         ---------------------------------------------------------------------- */
+      const toggleGridBtn = document.getElementById('toggleGridBtn');
+      if (toggleGridBtn) {
+        toggleGridBtn.addEventListener('click', () => {
+          state.gridVisible = !state.gridVisible;
+          document.getElementById('clearSpaceStage').classList.toggle('grid-blueprint', state.gridVisible);
+          const frame = document.getElementById('clearSpaceFrame');
+          frame.classList.toggle('border-[#EA580C]', state.gridVisible);
+          frame.classList.toggle('border-transparent', !state.gridVisible);
+          document.querySelectorAll('.grid-marker').forEach((m) => m.classList.toggle('opacity-0', !state.gridVisible));
+          document.getElementById('gridToggleText').textContent = state.gridVisible ? 'Hide Grid' : 'Show Grid';
+          document.getElementById('gridToggleDot').style.backgroundColor = state.gridVisible ? '#EA580C' : '#94A3B8';
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         8. Initial Bootstrap
+         ---------------------------------------------------------------------- */
+      setVersion('v1', false);
+      setHeroMode('full');
+      applyHeroSurface('white');
+      setConceptLayer('all');
+    })();
+  </script>
+</body>
+</html>
